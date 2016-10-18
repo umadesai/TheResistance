@@ -1,2 +1,2 @@
-# TheResistance
+# The Resistance
 POE 2016

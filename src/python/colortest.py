@@ -3,7 +3,10 @@ import cv2
 
 image = cv2.imread("resistor-1-2k.jpg")
 
-colors = [([0, 0, 200], [75, 75, 255])] #red
+red = ([0, 0, 200], [75, 75, 255])
+brown = ([0, 50, 160], [75, 110, 210]) #sort of
+
+colors = [brown]
 
 test1 = np.array([[1,2,3],[2,2,3]], dtype="uint8")
 test2 = np.array([[1,2,4],[2,4,5]], dtype="uint8")
