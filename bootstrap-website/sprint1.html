@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Bootstrap template from Start Bootstrap (startbootstrap.com), and written by David Miller, owner of Blackrock Digital. -->
+
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Clean Blog</title>
+    <title>The Resistance - Sprint 1</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@
                     <span class="sr-only">Toggle navigation</span>
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.html">The Resistance</a>
+                <a class="navbar-brand" href="index.html">The Resistances</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -69,78 +69,52 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/home-bg.jpg')">
+    <header class="intro-header" style="background-image: url('img/post-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>The Resistance</h1>
-                        <hr class="small">
-                        <span class="subheading">PoE 2016 Project to Sort Resistors</span>
+                    <div class="post-heading">
+                        <h1>Sprint 1</h1>
+                        <span class="meta">Posted by <a href="#">The Resistance</a> on October 31, 2016</span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-preview">
-                    <a href="sprint1.html">
-                        <h2 class="post-title">
-                            Man must explore, and this is exploration at its greatest
-                        </h2>
-                        <h3 class="post-subtitle">
-                            Problems look mighty small from 150 miles up
-                        </h3>
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>During the first sprint, we aimed to have some idea of what our end system would look like using physical models. We also aimed to achieve the resistance sensing functionality independent of the whole system, and then integrate that into our mechanical design.</p>
+
+                    <p>We focused a lot on mechanical design, sketch modeling and CAD-ing a conveyor belt system that will place resistors into our resistance sensing circuit and moving them to where they will be presented to the user at the end.</p>
+
+                    <p>We also made some design decisions regarding how to find the resistance of a resistor. We were debating between a circuit or color recognition, but chose to use the circuit for simplicity sake.</p>
+
+                    <h2 class="section-heading">Mechanical</h2>
+
+                    
+                    <h2 class="section-heading">Electrical</h2>
+
+                    <p>To sense the resistance of a resistor, we created a voltage divider, with one known resistor value and one unknown. By analyzing (using an arduino) the voltage read in between the two resistors, we can calculate the ratio of resistance between the two resistors, and thus, we know the resistance of the unknown resistor. The problem with this design is that, since the voltage we read in leaves us with a ratio, if the two resistor values are too far apart, the arduino will not be able to accurately pinpoint the resistor value. We hope to resolve this in the next sprint, using a digital potentiometer, to have a wide range of known values.</p>
+
+                    <a href="#">
+                        <img class="img-responsive" src="img/post-sample-image.jpg" alt="">
                     </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>
+                    <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
+
+
+                    <p>Placeholder text by <a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p>
+
+                    <h2 class="section-heading">Goals For Next Sprint</h2>
+
+                    <p>For next sprint, we hope to have a functioning mechanical system as well as allowing our circuit to sense a larger range of resistances using the digital potentiometer. We also want to be able to output the measured resistance using the arduino and an LCD screen.
                 </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="sprint1.html">
-                        <h2 class="post-title">
-                            I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
-                        </h2>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 18, 2014</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                            Science has not yet mastered prophecy
-                        </h2>
-                        <h3 class="post-subtitle">
-                            We predict too much for the next year and yet far too little for the next ten.
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on August 24, 2014</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                            Failure is not an option
-                        </h2>
-                        <h3 class="post-subtitle">
-                            Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on July 8, 2014</p>
-                </div>
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="next">
-                        <a href="#">Older Posts &rarr;</a>
-                    </li>
-                </ul>
             </div>
         </div>
-    </div>
+    </article>
 
     <hr>
 
