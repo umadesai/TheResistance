@@ -84,17 +84,56 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <p>We learned a lot during our first sprint about the structure and working style of the team, and we were able to develop our idea for the project much further. Going into sprint two we have three main overarching focuses:</p>
+                    <p>
+                    We learned a lot during our first sprint about the structure and working style of the team, and we were able to develop our idea for the project much further. Going into sprint two we have three main overarching focuses:</p>
 
-                    <p>1. Completing a thorough design phase, particularly focused on mechanical aspects, to ensure that we are able to handle our biggest technical risk areas.</p>
+                    <ol>
+                        <li>Completing a thorough design phase, particularly focused on mechanical aspects, to ensure that we are able to handle our biggest technical risk areas.</li>
+                        <li>Having a focus on being able to integrate our progress in each system by the end of each sprint, so that our progress is more clear from our integrated deliverable.</li>
+                        <li>Improving communication within the team and during the sprint review so that all of our work is well presented.</li>
+                    </ol>
 
-                    <p>2. Approaching tasks with a more goal-oriented focus, so that our progress is more clear from our sprint deliverable.</p>
+                    <h2 class="section-heading">Mechanical</h2>
 
-                    <p>3. Improving communication within the team and during the sprint review so that all of our work is well presented.</p>
+                    <p>Over the course of this sprint, we dove into a design process where we ideated different designs for the mechanical system. In our first prototype, we were relying on gravity to make a secure connection in our circuit, which was not ideal. It left room for the resistors to sort of bounce around and “walk” out of place. This would have given us inconsistent results. To continue the original design, we would have had to create some kind of clamping mechanism to come down on our resistors at the right time, which would have added unnecessary motors and complexity to our system.</p>
+                    <!-- (original sketch model picture, then CAD of the new thing) -->
 
-                    <h2 class="section-heading">Computing</h2>
+                    <p>Realizing this, we decided to rethink our design. We wanted to create a system that would be able to make a secure connection between the resistors and the circuit without adding too many moving parts. We ultimately settled on our most recent design.</p>
 
-                    <p>Our first task on the computing team was to implement the LCD screen so that it displays the resistance of the unknown resistor that the arduino is calculating.
+                    <a href="#">
+                        <img class="img-responsive" src="img/sprint2/assemblyBack.JPG" alt="">
+                    </a>
+                    <span class="caption text-muted">This is a caption.</span>
+
+                    <a href="#">
+                        <img class="img-responsive" src="img/sprint2/rightMech.JPG" alt="">
+                    </a>
+                    <span class="caption text-muted">This is a caption.</span>
+
+                    <a href="#">
+                        <img class="img-responsive" src="img/sprint2/leftMech.JPG" alt="">
+                    </a>
+                    <span class="caption text-muted">This is a caption.</span>
+
+                    <p>Our model for this sprint was a leap. We went from a conveyor with resistor-sized notches to a wheel with resistor sized notches. We also integrated our first prototype of the resistor dispensing system. Our vision for this model is that gravity would roll the resistors down the ramp in the dispenser, they would fall into the crevice between the dispenser wall and the wheel, then get picked up when the wheel spun. The wheel would then push the resistors up against wires connected to the circuit as it spun, creating the solid connection that we needed. And it worked!</p>
+
+                    <!-- (insert video. Link: https://www.youtube.com/watch?v=8hl53q4ERxg) -->
+
+                    <p>Well, it worked once every full wheel rotation if someone was pushing resistors down the ramp. This model showed us where the problems in our thinking and design were. When we first designed our resistor dispenser, we had our ramp ending in 1/4" of flat space since we laser cut our pieces and hadn't altered the straight edge.</p>
+
+                    <p> To fix this, we are going to change around our dispenser design (update to be posted soon!). We also found that the resistors were coming into contact with our servo motor after they were measured, causing them to either bend or get flung randomly about. This showed us that we needed to keep this constraint in mind and keep it in mind as we switch over to our final stepper motor.</p>
+
+                    <a href="#">
+                        <img class="img-responsive" src="img/sprint2/mech.JPG" alt="">
+                    </a>
+                    <span class="caption text-muted">This is a caption.</span>
+
+                     <h2 class="section-heading">Computing</h2>
+
+                    <p>Our main computing task for this sprint was to implement the LCD screen so that, when the resistance of the unknown resistor is being meausured, it displays the resistance to the screen, which required integrating with the mechanical and electrical systems.
+                    </p>
+
+                    <p>We used an I2C interface to connect the LCD to the Arduino. This is because if we connected the LCD directly to the Arduino, it would require the use of six pins rather than the two that I2C uses. To implement this we first started by connecting two of the I2C pins to their corresponding analog input pins in the Arduino, and connecting the other two pins to ground and power. We then uploaded an I2C addresss scanner to our Arduino which outputed the address for our display (each I2C interface display has its own built in address). 
                     </p>
 
                     <a href="#">
@@ -102,22 +141,18 @@
                     </a>
                     <span class="caption text-muted">Our lcd screen connected to the Arduino Uno with a simple I2C communication link.</span>
 
-                    <h2 class="section-heading">Mechanical</h2>
+                    <p>Next, we downloaded the latest LiquidCrystal library in Arduino that allows an Arduino board to control Liquid Crystal displays (LCDs) based on the Hitachi HD44780 chipset. We used example code from this library to write our own code to control the output of the LCD. We programmed the screen to start with an output of "The Resistance," and change to "The resistance is: (# in Ohms)" when we wanted the circuit to be measuring a resistance.
+                    </p>
 
-                    <p>Over the course of this sprint, we dove into a design process where we ideated and sketch modeled several different designs for the mechanical system. Here are a few of our ideas:
+                    <p>This step of the implementation required integrating the resistor measuring circuit and servo mechanical setup with the LCD screen. To do this we combined the circuitry and code from the resistor measuring circuit and servo into one final circuit and one Arduino file.
 
-                    <a href="#">
-                        <img class="img-responsive" src="img/sprint2/Sprint2Mech.jpeg" alt="">
-                    </a>
-                    <span class="caption text-muted">This is a caption.</span>
-
-                    Here is how we implemented these ideas:
+                    <p><a href="https://github.com/umadesai/TheResistance/blob/master/src/arduino/ResistanceTester/ResistanceTester.ino">Integrated Code File</a></p>
                     </p>
 
                     <a href="#">
-                        <img class="img-responsive" src="img/sprint2/mech.JPG" alt="">
+                        <img class="img-responsive" src="img/sprint2/integrated.JPG" alt="">
                     </a>
-                    <span class="caption text-muted">This is a caption.</span>
+                    <span class="caption text-muted">Our integrated setup for the LCD screen, mechanical system, and resistor measuring circuit.</span>
 
                     <h2 class="section-heading">Electrical</h2>
 
@@ -133,7 +168,14 @@
 
                     <h2 class="section-heading">Goals For Next Sprint</h2>
 
-                    <p>For next sprint, we hope to have a functioning mechanical system as well as allowing our circuit to sense a larger range of resistances using the digital potentiometer. We also want to be able to output the measured resistance using the arduino and an LCD screen.
+                    <p>
+                    <ol>
+                        <li>Implementation and iteration of mechanical sorting system after resistance is outputted</li>
+                        <li>Integrating upgraded circuit</li>
+                        <li>Improving accuracy of mechanical setup for testing resistance (including dispenser)</li>
+                    </ol>
+                    </p>
+
                 </div>
             </div>
             <!-- Pager -->
