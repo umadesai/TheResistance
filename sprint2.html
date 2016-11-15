@@ -96,37 +96,31 @@
                     <h2 class="section-heading">Mechanical</h2>
 
                     <p>Over the course of this sprint, we dove into a design process where we ideated different designs for the mechanical system. In our first prototype, we were relying on gravity to make a secure connection in our circuit, which was not ideal. It left room for the resistors to sort of bounce around and “walk” out of place. This would have given us inconsistent results. To continue the original design, we would have had to create some kind of clamping mechanism to come down on our resistors at the right time, which would have added unnecessary motors and complexity to our system.</p>
-                    <!-- (original sketch model picture, then CAD of the new thing) -->
+                    <a href="#">
+                        <img class="img-responsive" src="img/sprint2/decisions.png" alt="">
+                    </a>
 
                     <p>Realizing this, we decided to rethink our design. We wanted to create a system that would be able to make a secure connection between the resistors and the circuit without adding too many moving parts. We ultimately settled on our most recent design.</p>
 
                     <a href="#">
                         <img class="img-responsive" src="img/sprint2/assemblyBack.JPG" alt="">
                     </a>
-                    <span class="caption text-muted">This is a caption.</span>
+                    <span class="caption text-muted">Updated CAD model.</span>
 
                     <a href="#">
                         <img class="img-responsive" src="img/sprint2/rightMech.JPG" alt="">
                     </a>
-                    <span class="caption text-muted">This is a caption.</span>
 
                     <a href="#">
                         <img class="img-responsive" src="img/sprint2/leftMech.JPG" alt="">
                     </a>
-                    <span class="caption text-muted">This is a caption.</span>
+                    <span class="caption text-muted">Constructed mechanical setup.</span>
 
                     <p>Our model for this sprint was a leap. We went from a conveyor with resistor-sized notches to a wheel with resistor sized notches. We also integrated our first prototype of the resistor dispensing system. Our vision for this model is that gravity would roll the resistors down the ramp in the dispenser, they would fall into the crevice between the dispenser wall and the wheel, then get picked up when the wheel spun. The wheel would then push the resistors up against wires connected to the circuit as it spun, creating the solid connection that we needed. And it worked!</p>
-
-                    <!-- (insert video. Link: https://www.youtube.com/watch?v=8hl53q4ERxg) -->
 
                     <p>Well, it worked once every full wheel rotation if someone was pushing resistors down the ramp. This model showed us where the problems in our thinking and design were. When we first designed our resistor dispenser, we had our ramp ending in 1/4" of flat space since we laser cut our pieces and hadn't altered the straight edge.</p>
 
                     <p> To fix this, we are going to change around our dispenser design (update to be posted soon!). We also found that the resistors were coming into contact with our servo motor after they were measured, causing them to either bend or get flung randomly about. This showed us that we needed to keep this constraint in mind and keep it in mind as we switch over to our final stepper motor.</p>
-
-                    <a href="#">
-                        <img class="img-responsive" src="img/sprint2/mech.JPG" alt="">
-                    </a>
-                    <span class="caption text-muted">This is a caption.</span>
 
                      <h2 class="section-heading">Computing</h2>
 
@@ -147,6 +141,9 @@
                     <p>This step of the implementation required integrating the resistor measuring circuit and servo mechanical setup with the LCD screen. To do this we combined the circuitry and code from the resistor measuring circuit and servo into one final circuit and one Arduino file.
 
                     <p><a href="https://github.com/umadesai/TheResistance/blob/master/src/arduino/ResistanceTester/ResistanceTester.ino">Integrated Code File</a></p>
+                    </p>
+
+                    <p><a href="https://www.youtube.com/watch?v=8hl53q4ERxg">Video of Working System</a></p>
                     </p>
 
                     <a href="#">
