@@ -138,22 +138,27 @@
                     <p>Next, we downloaded the latest LiquidCrystal library in Arduino that allows an Arduino board to control Liquid Crystal displays (LCDs) based on the Hitachi HD44780 chipset. We used example code from this library to write our own code to control the output of the LCD. We programmed the screen to start with an output of "The Resistance," and change to "The resistance is: (# in Ohms)" when we wanted the circuit to be measuring a resistance.
                     </p>
 
-                    <p>This step of the implementation required integrating the resistor measuring circuit and servo mechanical setup with the LCD screen. To do this we combined the circuitry and code from the resistor measuring circuit and servo into one final circuit and one Arduino file.
-
-                    <p><a href="https://github.com/umadesai/TheResistance/blob/master/src/arduino/ResistanceTester/ResistanceTester.ino">Integrated Code File</a></p>
-                    </p>
-
-                    <p><a href="https://www.youtube.com/watch?v=8hl53q4ERxg">Video of Working System</a></p>
-                    </p>
-
                     <a href="#">
                         <img class="img-responsive" src="img/sprint2/integrated.JPG" alt="">
                     </a>
                     <span class="caption text-muted">Our integrated setup for the LCD screen, mechanical system, and resistor measuring circuit.</span>
 
+                    <p>This step of the implementation required integrating the resistor measuring circuit and servo mechanical setup with the LCD screen. To do this we combined the circuitry and code from the resistor measuring circuit and servo into one final circuit and one Arduino file.
+
+                    <p><a href="https://github.com/umadesai/TheResistance/blob/master/src/arduino/ResistanceTester/ResistanceTester.ino">Integrated Code File</a></p>
+                    </p>
+
+                    <p><iframe width="560" height="315" src="https://www.youtube.com/embed/8hl53q4ERxg" frameborder="0" allowfullscreen></iframe></p>
+
+
                     <h2 class="section-heading">Electrical</h2>
 
-                    <p>Over the course of this sprint, we developed a final circuit and integrated the digital potentiometer.</p>
+                    <p>Over the course of this sprint, we worked to build on a simple voltage divider circuit (from Sprint 1) that can measure voltage output, and therefore an unknown resistance, by incorporating digital potentiometers and relays. We noticed that a simple voltage divider measures less accurate values of resistance when the unknown resistance is different from the known resistor by orders of magnitude. To solve this problem, we designed a circuit as shown in the figure below, that uses digital potentiometers to vary the known resistance value until it is at the same order of magnitude with the unknown resistance. We use relays to make sure that at any given time only one of the potentiometers is connected to the voltage divider circuit. We use three digital potentiometers with maximum resistance values of 10 kOhms, 100 kOhms, and 1 MOhms and with precisions of …… Ohms, …., and …. respectively. This allows us to measure any resistances between 100 Ohms and 1 MOhms with reasonable accuracy. We use the first relay (labeled S1) to power (5V supply) or turn off (ground) the entire circuit. The other relays help channel the current to the desired digital potentiometer. </p>
+
+                    <a href="#">
+                        <img class="img-responsive" src="img/sprint2/upgradedCircuit.png" alt="" align="middle">
+                    </a>
+                    <span class="caption text-muted">Circuit schematic of our upgraded circuit that incorporates digital potentiometeres and relays.</span>
 
                     <a href="#">
                         <img class="img-responsive" src="img/sprint2/ee.JPG" alt="">
