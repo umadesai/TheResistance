@@ -14,8 +14,9 @@ int lowestVal = 0;
 float lowestDiff = 0;
 float diffVout = 0;
 float lowDiffVout = 0;
-int nextRelay = false;
-
+bool nextRelay = false;
+int relayNum = 0;
+int resistances[256];
 const int Relay1 = 11;
 const int Relay2 = 12;
 const int Relay3 = 13;
@@ -39,7 +40,12 @@ byte val = 0;
 
 void loop()
 {
-   Re1 = LOW; //turn on power to relays
+  if (relayNum == 0){
+    Re1 = LOW; //turn on power to relays
+    Re2 = HIGH;
+    Re3 = HIGH;
+    relayNum = 1;
+  }
       digitalWrite(Relay1, Re1);
       digitalWrite(Relay2, Re2);
       digitalWrite(Relay3, Re3);
@@ -76,10 +82,11 @@ void loop()
   Serial.println(unknownR);
   
 
-  difference = pow((unknownR - knownR),2);
+  difference = pow((unknownR - knownR),2); //square differences to more clearly show differences
   diffVout = pow(((1023/2) - Vout),2);
+  resistances[val] = unknownR;
 
-  if ((state == 0) && (val == 20)){
+  if ((state == 0) && (val == 20) && (relayNum = 0)){
     lowestVal = val;
     lowestDiff = difference;
     lowDiffVout = diffVout;
@@ -89,7 +96,7 @@ void loop()
       lowestVal = val;
       lowestDiff = difference;
       lowDiffVout = diffVout;
-
+      
     }
   }
 
@@ -114,13 +121,31 @@ void loop()
       nextRelay = true;
     }
     Serial.print("END: unknown R is ");
-    Serial.print(unknownR);
-     delay(100000);
-    return lowestVal, lowestDiff;
-    delay(100000);
+    Serial.print(resistances[lowestVal]);
+    Re1 = HIGH;
+    state = 3;
     
   }
-  
+
+  if (nextRelay == true){
+    if (relayNum == 1){
+      Re1 = LOW;
+      Re2 = LOW;
+      relayNum = 2;
+    }
+    else if (relayNum == 2){
+      Re1 = LOW;
+      Re2 = LOW;
+      Re3 = LOW;
+      relayNum = 1;
+    }
+    else {
+      relayNum = 0;
+      Serial.print("ERROR: RESTARTING");
+    }
+    nextRelay = false; //set nextRelay to false since we have moved to the next relay
+    state = 0;         //reset state to zero
+  }
     
   
  
