@@ -7,7 +7,7 @@ float unknownR = 0;
 float knownR = 0;
 float voltageRatio = 0;
 float wiperValue = 0;
-int difference[256]; 
+int difference; 
 int state = 0;
 int count = 0;
 int lowestVal = 0;
@@ -41,8 +41,10 @@ void loop()
   Serial.print(val);
   Serial.print(",  Vout:");
   Serial.print(Vout);
+  Serial.print(",  state:");
+  Serial.print(state);
   Serial.print(",  Difference:");
-  Serial.print(difference[val]);
+  Serial.print(difference);
   Serial.print(",  LowestVal:");
   Serial.print(lowestVal);
   Serial.print(",  LowestDiff:");
@@ -53,22 +55,22 @@ void loop()
   Serial.println(unknownR);
   
 
-  difference[val] = abs(unknownR - knownR);
+  difference = abs(unknownR - knownR);
 
   if (val == 20){
     lowestVal = val;
-    lowestDiff = difference[val];
+    lowestDiff = difference;
   }
   else{
-    if (difference[val] < lowestDiff){
+    if (difference < lowestDiff){
       lowestVal = val;
-      lowestDiff = difference[val];
+      lowestDiff = difference;
     }
   }
 
   if (state == 0){
   val+=10;           // increment value by 10s
-  if (val >= 256) { // if it passes 256th position (max), reset to zero
+  if (val > 250) { // if it passes 256th position (max), reset to zero
     val = lowestVal - 10;
     state = 1;
   }                 // start over from lowest value
@@ -83,7 +85,12 @@ void loop()
   }
 
   if (state == 2){
+    Serial.print("END: unknown R is ");
+    Serial.print(unknownR);
+     delay(100000);
     return lowestVal, lowestDiff;
+    delay(100000);
+    
   }
   
     
