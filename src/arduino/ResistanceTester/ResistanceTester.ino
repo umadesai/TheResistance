@@ -17,10 +17,6 @@ LiquidCrystal_I2C lcd(0x3F, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);  // Set the LCD I
 
 int IN1 = 2, IN2 = 3, IN3 = 4, IN4 = 5;
 
-boolean testResistance = true;
-int numFastSteps = 342; //total of 2055, divided by 2, rounded down
-int numSlowSteps = 343; //total of 2055, divided by 2, rounded up
-
 int currentStep = 0;
 
 void setup()
@@ -43,21 +39,10 @@ void setup()
 
 void loop()
 {
-  if (testResistance) {
-    int stepSize = 1;
-    for (int i = 0; i <= numSlowSteps; i += stepSize) {
       //since the stepper is blocking, we want to step a step at a time.
-      stepBackwards(stepSize);
+      stepBackwards(1);
       delay(10);
       readResistance();
-    }
-  }
-  else {
-    Serial.println("FAST\n\n\n\n");
-    stepBackwards(numFastSteps);
-  }
-  delay(100);
-  testResistance = !testResistance;
 }
 
 void readResistance() {
@@ -126,7 +111,7 @@ void singleStep(){
         writeStepperPins(LOW, LOW, LOW, LOW);
         break;
     }
-    currentStep-=(testResistance? 1:3);
+    currentStep-=1;
     if (currentStep < 0)
       currentStep = 7;
 }
