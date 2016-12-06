@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Bootstrap template from Start Bootstrap (startbootstrap.com), and written by David Miller, owner of Blackrock Digital. -->
+
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>The Resistance</title>
+    <title>The Resistance - Sprint 4</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -57,6 +57,7 @@
                     <li>
                         <a href="sprint1.html">Sample Post</a>
                     </li>
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -66,71 +67,68 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/resistors-home-bg.jpg')">
+    <header class="intro-header" style="background-image: url('img/sprint1/bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>The Resistance</h1>
-                        <hr class="small">
-                        <span class="subheading">Automated Resistor Sorting Machine</span>
-                        <span class="subheading">PoE 2016</span>
+                    <div class="post-heading">
+                        <h1>Sprint 1</h1>
+                        <span class="meta">Posted by <a href="#">The Resistance</a> on October 31, 2016</span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            	<hr>
-            	<div class="post-preview">
-                    <a href="sprint4.html">
-                        <h2 class="post-title">
-                            Sprint 4
-                        </h2>
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>During the first sprint, we aimed to have some idea of what our end system would look like using physical models. We also aimed to achieve the resistance sensing functionality independent of the whole system, and then integrate that into our mechanical design.</p>
+
+                    <p>We focused a lot on mechanical design, sketch modeling and CAD-ing a conveyor belt system that will place resistors into our resistance sensing circuit and moving them to where they will be presented to the user at the end.</p>
+
+                    <p>We also made some design decisions regarding how to find the resistance of a resistor. We were debating between a circuit or color recognition, but chose to use the circuit for simplicity sake.</p>
+                    
+                    <h2 class="section-heading">Electrical</h2>
+
+                    <p>To sense the resistance of a resistor, we created a voltage divider, with one known resistor value and one unknown. Using an Arduino, we can analyze the voltage read in between the two resistors, and calculate the ratio of resistance between the two resistors. Thus, we know the resistance of the unknown resistor.</p>
+
+                    <p>The problem with this design is that, since the voltage we read in leaves us with a ratio, if the two resistor values are too far apart, the arduino will not be able to accurately pinpoint the resistor value. We hope to resolve this in the next sprint, using a digital potentiometer, to have a wide range of known values.</p>
+
+                    <a href="#">
+                        <img class="img-responsive" src="img/sprint1/circuitdiagram.png" alt="">
                     </a>
-                    <p class="post-meta">Posted by <a href="#">The Resistance</a> on December 9, 2016</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="sprint3.html">
-                        <h2 class="post-title">
-                            Sprint 3
-                        </h2>
+                    <span class="caption text-muted">Current circuit diagram</span>
+
+                    <h2 class="section-heading">Mechanical</h2>
+
+                    <p>For this sprint, we pursued the idea of having a conveyor belt that would have notches just big enough to pick one resistor at a time out of some kind of containment unit. Then, as the conveyor belt would spin, the resistors would be pulled across a set of rails that connected to the electrical system. The notches would be just far enough apart that only one resistor would pass through the circuit at a time.</p>
+                    <p>To test this idea, we made a sketch model out of cardboard and attached a protoboard that had our resistance testing circuit and a rail on each side to catch the resistor and measure its resistance.</p>
+
+                    <a href="#">
+                        <img class="img-responsive" src="img/sprint1/sketchmodel.png" alt="" >
                     </a>
-                    <p class="post-meta">Posted by <a href="#">The Resistance</a> on November 11, 2016</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="sprint2.html">
-                        <h2 class="post-title">
-                            Sprint 2
-                        </h2>
+                    <br>
+                    <a href="#">
+                        <img class="img-responsive" src="img/sprint1/sketchmodel2.png" alt="">
                     </a>
-                    <p class="post-meta">Posted by <a href="#">The Resistance</a> on November 11, 2016</p>
+                    <span class="caption text-muted">Sketch models of the conveyor belt idea</span>
+
+                    <h2 class="section-heading">Goals For Next Sprint</h2>
+
+                    <p>For next sprint, we hope to prototype our mechanical system more as well as coming up with other possible mechanical designs. We also want to include the digital potentiometer into out electrical design, and output the measured resistance using the Arduino and an LCD screen.
                 </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="sprint1.html">
-                        <h2 class="post-title">
-                            Sprint 1
-                        </h2>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">The Resistance</a> on October 31, 2016</p>
-                </div>
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="next">
-                        <a href="#">Older Posts &rarr;</a>
-                    </li>
-                </ul>
             </div>
+            <!-- Pager -->
+            <ul class="pager">
+                <li>
+                    <a href="sprint2.html">Sprint 2 &rarr;</a>
+                </li>
+            </ul>
         </div>
-    </div>
+    </article>
 
     <hr>
 
