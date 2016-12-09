@@ -5,7 +5,7 @@
 #include <Wire.h>
 //#include <Stepper.h>
 
-const int analogPin = 0;
+const int analogPin = 0, vinPin = 1;
 const int RELAY1 = 11, RELAY2 = 12, RELAY3 = 13;
 
 LiquidCrystal_I2C lcd(0x3F, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);  // Set the LCD I2C address
@@ -46,6 +46,7 @@ void loop()
     singleStep();
     delay(10);
   }
+//  delay(500);
   printBestResistance();
 }
 
