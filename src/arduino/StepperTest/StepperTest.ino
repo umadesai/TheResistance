@@ -16,14 +16,13 @@ void setup() {
   Serial.println("Start");
 }
 
-int numLoops = 0;
 
 void loop() {
   //using serial to control when the stepper starts and stops
   int count = 0;
   while(Serial.read() == -1){
    //step until the user sends something over serial
-   stepBackwards(1);
+   singleStep();
    count++;
    delay(10);
   }
@@ -37,19 +36,6 @@ void loop() {
   }
 
   while(Serial.read() != -1); //clear buffer
-}
-
-void stepBackwards(int numSteps) {
-  long lastTime = micros();
-  int i = 0;
-  while(i<numSteps) {
-   if((micros() - lastTime) >= 50) {
-      singleStep();
-      lastTime = micros();
-      i++;
-   }
-    
-  }
 }
 
 void singleStep(){

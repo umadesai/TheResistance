@@ -14,44 +14,41 @@ LiquidCrystal_I2C lcd(0x3F, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);  // Set the LCD I
 int IN1 = 2, IN2 = 3, IN3 = 4, IN4 = 5;
 int currentStep = 0; //stepper control
 
+const boolean USE_LCD = true;
+
 void setup()
 {
   Serial.begin(9600);
 
   //lcd
-  lcd.begin(20, 4);
-  lcd.backlight();
-  lcd.setCursor(0, 0); //Start at character 0 on line 0
-  lcd.print("The Resistance");
-  delay(1000);
+  if (USE_LCD) {
+    lcd.begin(20, 4);
+    lcd.backlight();
+    lcd.setCursor(0, 0); //Start at character 0 on line 0
+    lcd.print("The Resistance");
+    delay(1000);
+  }
 
   //stepper
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
+  pinMode(RELAY1, OUTPUT);
+  pinMode(RELAY2, OUTPUT);
+  pinMode(RELAY3, OUTPUT);
 }
 
 void loop()
 {
   //since the stepper is blocking, we want to step a step at a time.
-  stepBackwards(1);
-  delay(10);
-  readResistance();
-}
-
-void stepBackwards(int numSteps) {
-  long lastTime = micros();
-  int i = 0;
-  while (i <= numSteps) {
-    if ((micros() - lastTime) >= 50) {
-      singleStep();
-      lastTime = micros();
-      i++;
-    }
-
+  for (int i = 0; i < 20; i++) {
+    singleStep();
+    delay(10);
   }
+  printBestResistance();
 }
+
 
 void singleStep() {
   switch (currentStep) {
@@ -83,7 +80,7 @@ void singleStep() {
       writeStepperPins(LOW, LOW, LOW, LOW);
       break;
   }
-  currentStep -= 1;
+  currentStep -= 2;
   if (currentStep < 0)
     currentStep = 7;
 }
