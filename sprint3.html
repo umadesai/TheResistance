@@ -95,24 +95,14 @@
 
                     <p>This sprint, we redesigned the ramp mechanism. Instead of a feeder with a slot to let resistors through, we started work on a sled shape, so the resistors could fall to the end and wait at the dip to get picked up by the wheel. This increased the reliability of getting resistors onto the wheel; however, when the resistors slide down the ramp, it is very uncontrolled.</p>
 
-                    <p>We also switched from using a continuous servo to using a stepper motor, to combat losses in positional accuracy. We used the BYJ48 stepper motor, and using <a href="http://www.instructables.com/id/BYJ48-Stepper-Motor/">this Instructable</a>, we were able to get the stepper to turn.</p>
-
-                    <a href="#">
-                        <img class="img-responsive" src="img/sprint1/circuitdiagram.png" alt="">
-                    </a>
-                    <span class="caption text-muted">Current circuit diagram</span>
-
                     <h2 class="section-heading">Computing</h2>
                     <p>We learned from last sprint that a continuous servo did not work the way we expected--because of how the servo is made continuous, the servo is no longer able to take a desired position as the input. We learned of stepper motors--motors that could rotate infinitely, but with precise control over it's position.</p>
+
+                    <p>We used the BYJ48 stepper motor, and using <a href="http://www.instructables.com/id/BYJ48-Stepper-Motor/">this Instructable</a>, we were able to get the stepper to turn. We adapted the code that allowed the stepper to turn backwards (this particular stepper could not turn backwards using the library’s methods), due to a moment of weakness and lack of communication between the computing and electrical teams that caused the stepper to be mounted such that its forward turning motion turns backwards. </p>
 
                     <h2 class="section-heading">Mechanical</h2>
 
                     <p></p>
-
-                    <a href="#">
-                        <img class="img-responsive" src="img/sprint1/sketchmodel.png" alt="" >
-                    </a>
-                    <span class="caption text-muted">Sketch models of the conveyor belt idea</span>
 
                     <h2 class="section-heading">Goals For Next Sprint</h2>
 
