@@ -16,7 +16,7 @@ double bestResistanceGuess = 0.0;
 
 // Main methods-------------------------------------------------------------------------------
 
-void printBestResistance() {
+float bestResistance() {
   digitalWrite(RELAY3, RELAY_ON);
   delay(50);
 
@@ -60,6 +60,7 @@ void printBestResistance() {
     printResults();
 
   digitalWrite(RELAY3, RELAY_OFF);
+  return bestResistanceGuess;
 }
 
 void readResistance() {

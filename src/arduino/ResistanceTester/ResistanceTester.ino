@@ -3,6 +3,7 @@
 */
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
+#include <Servo.h>
 //#include <Stepper.h>
 
 const int analogPin = 0, vinPin = 1;
@@ -18,6 +19,9 @@ int currentStep = 0; //stepper control
 //button
 int BUTTON = 2;
 
+//servo
+Servo sorter;
+
 void setup()
 {
   Serial.begin(9600);
@@ -27,6 +31,9 @@ void setup()
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
+  //servo
+  sorter.attach(10);
+  //relay
   pinMode(RELAY1, OUTPUT);
   pinMode(RELAY2, OUTPUT);
   pinMode(RELAY3, OUTPUT);
@@ -92,8 +99,8 @@ void setup()
 
 void loop()
 {
-  //since the stepper is blocking, we want to step a step at a time.
-  printBestResistance();
+  float resistance = bestResistance();
+  setSorterWheelPos(resistance);
   for (int i = 0; i < 682; i++) {
     singleStep();
     delay(10);
@@ -101,6 +108,26 @@ void loop()
   
 }
 
+void setSorterWheelPos(float resistance){
+   if(resistance < 1000){
+      sorter.write(0);
+   }
+   if(resistance < 5000){
+      sorter.write(60);
+   }
+   if(resistance < 10000){
+      sorter.write(120);
+   }
+   if(resistance < 50000){
+      sorter.write(180);
+   }
+   if(resistance < 100000){
+      sorter.write(240);
+   }
+   if(resistance < 1000000){
+      sorter.write(300);
+   }
+}
 
 void singleStep() {
   switch (currentStep) {
