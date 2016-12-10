@@ -10,7 +10,7 @@ const int analogPin = 0, vinPin = 1;
 const int RELAY1 = 11, RELAY2 = 12, RELAY3 = 13;
 
 LiquidCrystal_I2C lcd(0x3F, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);  // Set the LCD I2C address
-const boolean USE_LCD = true;
+const boolean USE_LCD = false;
 
 //stepper in
 int IN1 = 3, IN2 = 4, IN3 = 5, IN4 = 6;
@@ -57,44 +57,44 @@ void setup()
   }
 
   //calibration
-  pinMode(BUTTON, INPUT);
-
-
-  if (USE_LCD) {
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Press the button");
-    lcd.setCursor(0, 1);
-    lcd.print("");
-    lcd.print("when a notch on the");
-    lcd.setCursor(0, 2);
-    lcd.print("wheel is aligned");
-    lcd.setCursor(0, 3);
-    lcd.print("with the ramp");
-  }
-
-  boolean initButton = digitalRead(BUTTON);
-  while (digitalRead(BUTTON) == initButton) {
-    singleStep();
-    delay(20);
-  }
-
-  delay(250);
-  for (int i = 0; i < 341; i++) {
-    singleStep();
-    delay(5);
-  }
-
-   if (USE_LCD) {
-    lcd.clear();
-    lcd.setCursor(1, 0);
-    lcd.print("When you are ready,");
-    lcd.setCursor(0, 1);
-    lcd.print("drop a resistor onto");
-    lcd.setCursor(6, 2);
-    lcd.print("the ramp");
-    delay(3500);
-  }
+//  pinMode(BUTTON, INPUT);
+//
+//
+//  if (USE_LCD) {
+//    lcd.clear();
+//    lcd.setCursor(0, 0);
+//    lcd.print("Press the button");
+//    lcd.setCursor(0, 1);
+//    lcd.print("");
+//    lcd.print("when a notch on the");
+//    lcd.setCursor(0, 2);
+//    lcd.print("wheel is aligned");
+//    lcd.setCursor(0, 3);
+//    lcd.print("with the ramp");
+//  }
+//
+//  boolean initButton = digitalRead(BUTTON);
+//  while (digitalRead(BUTTON) == initButton) {
+//    singleStep();
+//    delay(20);
+//  }
+//
+//  delay(250);
+//  for (int i = 0; i < 341; i++) {
+//    singleStep();
+//    delay(5);
+//  }
+//
+//   if (USE_LCD) {
+//    lcd.clear();
+//    lcd.setCursor(1, 0);
+//    lcd.print("When you are ready,");
+//    lcd.setCursor(0, 1);
+//    lcd.print("drop a resistor onto");
+//    lcd.setCursor(6, 2);
+//    lcd.print("the ramp");
+//    delay(3500);
+//  }
 }
 
 void loop()

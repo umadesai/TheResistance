@@ -13,7 +13,9 @@ const float SUCCESS_THRESHOLD = 0.05, WAY_OFF_THRESHOLD = 0.3; /*CHANGE THESE TH
 //guesses
 float bestRatioDiff = 1.0;
 double bestResistanceGuess = 0.0;
+byte bestVal = 0;
 
+int lowerBoundPot, upperBoundPot;
 // Main methods-------------------------------------------------------------------------------
 
 float bestResistance() {
@@ -25,33 +27,30 @@ float bestResistance() {
   //testing all 3 resistors/digital potentiometers
   for (int i = 0; i < 3; i++) {
     setRelays(i);
+    Serial.println(i + "---------------------------------------------");
     int digiPotVal = 0; //store it as an int, so we can chack if it goes over. Cast it as a byte before we send it.
 
     while (digiPotVal < 256) {
       writeDigiPotResistance((byte)digiPotVal, i);
       readResistance();
 
-      //find the difference between the current ratio and the desired ratio (where both resistors are the same)
+
+
+      setBestRatio(digiPotVal);
       float ratioDiff = abs(ratio - desiredRatio);
 
-      //set the best result so far
-      if (ratioDiff < bestRatioDiff) {
-        bestRatioDiff = ratioDiff;
-        bestResistanceGuess = unknownR;
+      //set the next value of digiPotVal based on how far we are from the ideal
+      if (ratioDiff > WAY_OFF_THRESHOLD) {
+        digiPotVal += 20;
       }
-
-//      //set the next value of digiPotVal based on how far we are from the ideal
-//      if (ratioDiff > WAY_OFF_THRESHOLD) {
-//        digiPotVal += 20;
-//      }
-//      else if (ratioDiff < SUCCESS_THRESHOLD) {
-//        //we found a really great value, quit looking for better values
-//        i = 4;
-//        break;
-//      }
-//      else {
-//        digiPotVal++;
-//      }
+      else if (ratioDiff < SUCCESS_THRESHOLD) {
+        //we found a really great value, quit looking for better values
+        i = 4;
+        break;
+      }
+      else {
+        digiPotVal++;
+      }
     }
   }
 
@@ -65,15 +64,34 @@ float bestResistance() {
 
 void readResistance() {
   int vout = analogRead(analogPin);
-  vin = analogRead(vinPin);
+  //  vin = analogRead(vinPin);
   if (vout)
   {
     ratio = ((float)vout) / vin;
     unknownR = r1 * (vin - vout) / vout; // V = IR, R2 = R1*(Vin - Vout)/Vout
   }
+  Serial.print(r1);
+  Serial.print(" ");
+  Serial.print(vout);
+  Serial.print(" ");
+  Serial.println(unknownR);
 }
 
 // Helper methods------------------------------------------------------------------------------
+
+boolean setBestRatio(byte digiPotVal) {
+  //find the difference between the current ratio and the desired ratio (where both resistors are the same)
+  float ratioDiff = abs(ratio - desiredRatio);
+
+  //set the best result so far
+  if (ratioDiff < bestRatioDiff) {
+    bestRatioDiff = ratioDiff;
+    bestResistanceGuess = unknownR;
+    bestVal = (byte)digiPotVal;
+    return true;
+  }
+  return false;
+}
 
 /**
    There are 3 resistors that the relays can be programmed to test with, numbered 0, 1, 2.
@@ -128,8 +146,22 @@ void setStartingValues() {
   bestRatioDiff = 1.0;
   unknownR = 0.0;
   ratio = 0.0;
+  bestVal = 0;
 }
 
+int addWhenInByte(int initial, int delta) {
+  if (initial <= 255 - delta)
+    return initial + delta;
+  else
+    return 255;
+}
+
+int subtractWhenInByte(int initial, int delta) {
+  if (initial >= delta)
+    return initial - delta;
+  else
+    return 0;
+}
 void writeDigiPotResistance(byte val, int whichResistor) {
   int address = 0;
   if (whichResistor == 0) {
