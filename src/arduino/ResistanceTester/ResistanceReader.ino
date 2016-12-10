@@ -121,9 +121,9 @@ void printResults() {
   Serial.println(bestResistanceGuess);
 
   if (USE_LCD) {
-   lcd.clear();
+    lcd.clear();
     lcd.setCursor(0, 0); //Start at character 0 on line 0
-    lcd.println("The resistance is:");
+    lcd.print("The resistance is:");
     lcd.setCursor(0, 1);
     lcd.print(String(bestResistanceGuess));
 

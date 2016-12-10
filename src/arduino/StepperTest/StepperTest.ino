@@ -2,8 +2,9 @@
 
 //Stepper motor(64, 2, 3, 4, 5);
 
-int IN1 = 2, IN2 = 3, IN3 = 4, IN4 = 5;
+int IN1 = 3, IN2 = 4, IN3 = 5, IN4 = 6;
 int currentStep = 0;
+int BUTTON = 2;
 
 void setup() {
   // put your setup code here, to run once:
@@ -14,25 +15,28 @@ void setup() {
 //  motor.setSpeed(300);
   Serial.begin(9600);
   Serial.println("Start");
+  pinMode(BUTTON, INPUT);
+  
 }
 
 
 void loop() {
   //using serial to control when the stepper starts and stops
   int count = 0;
-  while(Serial.read() == -1){
+  boolean initButton = digitalRead(BUTTON);
+  while(Serial.read() == -1 && (digitalRead(BUTTON) == initButton)){
    //step until the user sends something over serial
    singleStep();
    count++;
-   delay(10);
+   delay(20);
   }
-
   Serial.println(count);
   while(Serial.read() != -1); //clear buffer
-  
-  while(Serial.read() == -1){
+
+  initButton = digitalRead(BUTTON);
+  while(Serial.read() == -1 && digitalRead(BUTTON) == initButton){
    //do nothing until user sends something over serial
-   delay(10);
+   delay(20);
   }
 
   while(Serial.read() != -1); //clear buffer
