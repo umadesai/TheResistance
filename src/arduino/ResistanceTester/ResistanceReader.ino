@@ -25,8 +25,6 @@ void printBestResistance() {
   //testing all 3 resistors/digital potentiometers
   for (int i = 0; i < 3; i++) {
     setRelays(i);
-    Serial.print(i);
-    Serial.println("----------------------------");
     int digiPotVal = 0; //store it as an int, so we can chack if it goes over. Cast it as a byte before we send it.
 
     while (digiPotVal < 256) {
@@ -41,23 +39,18 @@ void printBestResistance() {
         bestRatioDiff = ratioDiff;
         bestResistanceGuess = unknownR;
       }
-      Serial.println(unknownR);
-      Serial.println(ratioDiff);
 
       //set the next value of digiPotVal based on how far we are from the ideal
       if (ratioDiff > WAY_OFF_THRESHOLD) {
         digiPotVal += 10;
-        Serial.println("elseif 1");
       }
       else if (ratioDiff < SUCCESS_THRESHOLD) {
         //we found a really great value, quit looking for better values
         i = 4;
-        Serial.println("elseif 2");
         break;
       }
       else {
         digiPotVal++;
-        Serial.println("elseif 3");
       }
     }
   }
