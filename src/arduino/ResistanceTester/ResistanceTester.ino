@@ -46,7 +46,7 @@ void setup()
     lcd.setCursor(3, 3);
     lcd.print("The Revolution");
     singleStep();
-    delay(5000);
+    delay(3500);
   }
 
   //calibration
@@ -73,9 +73,9 @@ void setup()
   }
 
   delay(250);
-  for (int i = 0; i < 343; i++) {
+  for (int i = 0; i < 341; i++) {
     singleStep();
-    delay(10);
+    delay(5);
   }
 
    if (USE_LCD) {
@@ -86,19 +86,19 @@ void setup()
     lcd.print("drop a resistor onto");
     lcd.setCursor(6, 2);
     lcd.print("the ramp");
-    delay(5000);
+    delay(3500);
   }
 }
 
 void loop()
 {
   //since the stepper is blocking, we want to step a step at a time.
-  for (int i = 0; i < 685; i++) {
+  printBestResistance();
+  for (int i = 0; i < 682; i++) {
     singleStep();
     delay(10);
   }
-  //  delay(500);
-  printBestResistance();
+  
 }
 
 
