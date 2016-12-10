@@ -28,7 +28,7 @@ float bestResistance() {
     int digiPotVal = 0; //store it as an int, so we can chack if it goes over. Cast it as a byte before we send it.
 
     while (digiPotVal < 256) {
-      setR1(i); // writeDigiPotResistance((byte)digiPotVal); /*CHANGE THIS WHEN INTEGRATING POTS*/
+      writeDigiPotResistance((byte)digiPotVal, i);
       readResistance();
 
       //find the difference between the current ratio and the desired ratio (where both resistors are the same)
@@ -40,18 +40,18 @@ float bestResistance() {
         bestResistanceGuess = unknownR;
       }
 
-      //set the next value of digiPotVal based on how far we are from the ideal
-      if (ratioDiff > WAY_OFF_THRESHOLD) {
-        digiPotVal += 10;
-      }
-      else if (ratioDiff < SUCCESS_THRESHOLD) {
-        //we found a really great value, quit looking for better values
-        i = 4;
-        break;
-      }
-      else {
-        digiPotVal++;
-      }
+//      //set the next value of digiPotVal based on how far we are from the ideal
+//      if (ratioDiff > WAY_OFF_THRESHOLD) {
+//        digiPotVal += 20;
+//      }
+//      else if (ratioDiff < SUCCESS_THRESHOLD) {
+//        //we found a really great value, quit looking for better values
+//        i = 4;
+//        break;
+//      }
+//      else {
+//        digiPotVal++;
+//      }
     }
   }
 
@@ -65,7 +65,7 @@ float bestResistance() {
 
 void readResistance() {
   int vout = analogRead(analogPin);
-  /*change vin here it needs to be read in*/
+  vin = analogRead(vinPin);
   if (vout)
   {
     ratio = ((float)vout) / vin;
@@ -130,14 +130,29 @@ void setStartingValues() {
   ratio = 0.0;
 }
 
-void writeDigiPotResistance(byte val) {
-  Wire.beginTransmission(44); // transmit to device #44 (0x2c)
-  // device address is specified in datasheet
+void writeDigiPotResistance(byte val, int whichResistor) {
+  int address = 0;
+  if (whichResistor == 0) {
+    //10k
+    address = 44;
+    r1 = 30.524 + ((float)val * 38.34);
+  }
+  else if (whichResistor == 1) {
+    //100K
+    address = 46;
+    r1 = 174.17 + ((float)val * 384.62);
+  }
+  else if (whichResistor == 2) {
+    //1M
+    address = 45;
+    r1 = (-0.1644 * (float)(pow(val, 3))) + (64.274 * (float)(pow(val, 2))) - (1652.7 * (float) val) + 153635;
+  }
+  Wire.beginTransmission(address);
   Wire.write(byte(0x00));            // sends instruction byte
   Wire.write(val);             // sends potentiometer value byte
   Wire.endTransmission();     // stop transmittings
-  r1 = 60 + (val * 39);         // potentiometer resistance RWB = RAB/256 + RW = 39*val + 60
 }
+
 
 
 
