@@ -70,7 +70,7 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/sprint1/bg.jpg')">
+    <header class="intro-header" style="background-image: url('img/sprint4/resistors.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -88,8 +88,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <p>
-                    Sprint Goals</p>
+                    <p>Sprint Goals</p>
 
                     <ol>
                         <li>Last iteration of resistor dispensing system.</li>
@@ -109,20 +108,29 @@
 
                     <h2 class="section-heading">Mechanical</h2>
 
-                    <p>Mechanical progress</p>
+                    <p>During this sprint, more electrical components were integrated into the CAD. The required distances and orientations of the components (due to wires and connections and the such) were an interesting new challenge. It forced our team to communicate more about what we needed in order to be successful. While our CAD doesn’t contain particularly specific models of our electrical pieces, we did have an understanding of how we needed to place them relative to all of the mechanical pieces in the CAD and accounted for the space they would need. </p>
 
                     <a href="#">
-                        <img class="img-responsive" src="img/sprint1/sketchmodel.png" alt="" >
+                        <img class="img-responsive" src="img/sprint4/FinalCAD.JPG" alt="">
                     </a>
-                    <br>
+                    <span class="caption text-muted">Final CAD</span>
+
+                    <p>One of the things we iterated on this sprint was the ramp between the user and the notched wheel. We made the ramp narrower so it would hug the wide part of the resistor a little more tightly and added a component on the top. The hoped-for outcome was that the gaps on the edges of the ramp would only be wide enough for the leads of the resistor, which would force the resistor to fall against the wheel in the proper orientation.</p>
+
+                    <p> We also assembled our resistor sorting vessel for the most part. We were able to get together all of the pieces except for the clear outer casing, so we improvised with a strip of cardboard. It worked well for our purposes; the cardboard was light and held the circular shape with ease.</p>
+
                     <a href="#">
-                        <img class="img-responsive" src="img/sprint1/sketchmodel2.png" alt="">
+                        <img class="img-responsive" src="img/sprint4/sorter.png" alt="">
                     </a>
-                    <span class="caption text-muted">Mechanical caption</span>
+                    <span class="caption text-muted">The completed vessel.</span>
 
-                    <h2 class="section-heading">Final Product</h2>
+                    <p> We also put together a basic ramp to get the resistors from the wheel to the sorting vessel.</p>
 
-                    <p>Final description</p>
+                    <h2 class="section-heading">Computing</h2>
+
+                    <p> Due to problems with the digital potentiometer that caused it to stop working shortly after the start of the sprint, the computing team began by integrating the relay, which would switch between 3 different resistors--a 100Ω, 10kΩ, 1MΩ. We created a second file (as part of the same program) to write all the code related to the relay and reading the resistances, and designed it to be modular enough to replace the resistors with digital potentiometers by only changing a few lines of code.</p>
+
+                    <p> We also designed a way to have the user calibrate the wheel before hand. The stepper motor does not keep track of absolute position, only relative, but in order to sort and only display resistance when there clearly should be a resistor touching the wires, we designed a system using a simple push button and prompts to the user on the lcd, so that the user will stop the wheel when a notch is aligned with the ramp, and now the wheel has a positional reference.</p>
                 </div>
             </div>
             <!-- Pager -->

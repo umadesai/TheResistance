@@ -122,9 +122,9 @@
 
                     <p>Our model for this sprint was a leap. We went from a conveyor with resistor-sized notches to a wheel with resistor sized notches. We also integrated our first prototype of the resistor dispensing system. Our vision for this model is that gravity would roll the resistors down the ramp in the dispenser, they would fall into the crevice between the dispenser wall and the wheel, then get picked up when the wheel spun. The wheel would then push the resistors up against wires connected to the circuit as it spun, creating the solid connection that we needed. And it worked!</p>
 
-                    <p>Well, it worked once every full wheel rotation if someone was pushing resistors down the ramp. This model showed us where the problems in our thinking and design were. When we first designed our resistor dispenser, we had our ramp ending in 1/4" of flat space since we laser cut our pieces and hadn't altered the straight edge.</p>
+                    <p>Well, it worked once every full wheel rotation if someone was pushing resistors down the ramp. This model showed us where the problems in our thinking and design were. When we first designed our resistor dispenser, we had our ramp ending in 1/4" of flat space since we laser cut our pieces and hadn't altered the straight edge. This was causing the resistors to get stuck before getting onto the wheel.</p>
 
-                    <p> To fix this, we are going to change around our dispenser design (update to be posted soon!). We also found that the resistors were coming into contact with our servo motor after they were measured, causing them to either bend or get flung randomly about. This showed us that we needed to keep this constraint in mind and keep it in mind as we switch over to our final stepper motor.</p>
+                    <p> To fix this, we are going to change around our dispenser design so that gravity helps rather than hinders us. We also found that the resistors were coming into contact with our servo motor after they were measured, causing them to either bend or get flung randomly about. This showed us that we needed to keep this constraint in mind and be mindful of where the resistor leads are relative to other parts as we switch over to our final stepper motor.</p>
 
                      <h2 class="section-heading">Computing</h2>
 
@@ -173,9 +173,9 @@
 
                     <p>
                     <ol>
-                        <li>Improving accuracy of mechanical setup for testing resistance, particularly dispensing system</li>
+                        <li>Improving accuracy of mechanical setup for testing resistance, particularly dispensing system: Our dispenser wasn’t reliable in getting resistors to the circuit. We need to find a better way to deliver the resistors from the user to the notched wheel. Ideally, this way will allow the user to input many resistors at once and they will be measured one by one.</li>
                         <li>Finish implementing upgraded circuit</li>
-                        <li>Further design of mechanical sorting system after resistance is outputted</li>
+                        <li>Further design of mechanical sorting system after resistance is outputted: Now that we have a better idea of how the initial part of the system will be constructed, we need to work on our sorting mechanism. We will need a lighter, more streamlined containment unit (so a servo can spin it quickly without getting damaged) as well as a way to deliver the resistors to the unit after resistance is read.</li>
                     </ol>
                     </p>
 
