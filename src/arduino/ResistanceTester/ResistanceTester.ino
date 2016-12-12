@@ -6,7 +6,7 @@
 #include <Servo.h>
 //#include <Stepper.h>
 
-const int analogPin = 0, vinPin = 1;
+const int analogPin = A0, vinPin = A1;
 const int RELAY1 = 11, RELAY2 = 12, RELAY3 = 13;
 
 LiquidCrystal_I2C lcd(0x3F, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);  // Set the LCD I2C address

@@ -16,6 +16,13 @@ double bestResistanceGuess = 0.0;
 byte bestVal = 0;
 
 int lowerBoundPot, upperBoundPot;
+
+
+
+bool nextRelay = false;
+int state = 0;
+
+
 // Main methods-------------------------------------------------------------------------------
 
 float bestResistance() {
@@ -30,29 +37,68 @@ float bestResistance() {
     Serial.println(i + "---------------------------------------------");
     int digiPotVal = 0; //store it as an int, so we can chack if it goes over. Cast it as a byte before we send it.
 
-    while (digiPotVal < 256) {
+    //    while (digiPotVal < 256) {
+    nextRelay = false;
+    while (!nextRelay) {
       writeDigiPotResistance((byte)digiPotVal, i);
       readResistance();
 
 
-
+      Serial.println(digiPotVal);
       setBestRatio(digiPotVal);
-      float ratioDiff = abs(ratio - desiredRatio);
 
-      //set the next value of digiPotVal based on how far we are from the ideal
-      if (ratioDiff > WAY_OFF_THRESHOLD) {
-        digiPotVal += 20;
+      if (state == 0) {
+        digiPotVal += 20;         // increment value by 20s
+        if (digiPotVal > 240) { // if it passes 240th position (max while incrementing in 20s)
+          digiPotVal = bestVal - 20; // go back to val 20 points below where lowest value was recorded
+          state = 1; // change to state 1
+        }
       }
-      else if (ratioDiff < SUCCESS_THRESHOLD) {
-        //we found a really great value, quit looking for better values
-        i = 4;
-        break;
+
+
+      else if (state == 1) {
+        digiPotVal += 10;         // increment value by 10s
+        if (digiPotVal >= (bestVal + 20)) { // if it passes 256th position (max), reset to zero
+          state = 2;
+          digiPotVal = bestVal - 10;
+        }                 // start over from lowest value
+        if (digiPotVal >= (250)) { // if it passes 256th position (max), reset to zero
+          state = 2;
+          digiPotVal = bestVal - 10;
+        }
       }
-      else {
-        digiPotVal++;
+
+      else if (state == 2) {
+        digiPotVal++;         // increment value by 1
+        if (digiPotVal >= (bestVal + 10)) { // if it passes 256th position (max), reset to zero
+          state = 3;
+        }                 // start over from lowest value
       }
+
+      else if (state == 3) {
+        //        if (bestRatioDiff > WAY_OFF_THRESHOLD) { //if the lowest vout difference is higher than 100^2, we should try again at the next relay
+        nextRelay = true;
+        state = 0;
+      }
+
+
+      //      float ratioDiff = abs(ratio - desiredRatio);
+      //DSte
+      //      //set the next value of digiPotVal based on how far we are from the ideal
+      //      if (ratioDiff > WAY_OFF_THRESHOLD) {
+      //        digiPotVal += 20;
+      //      }
+      //      else if (ratioDiff < SUCCESS_THRESHOLD) {
+      //        //we found a really great value, quit looking for better values
+      //        i = 4;
+      //        break;
+      //      }
+      //      else {
+      //        digiPotVal++;
+      //      }
     }
   }
+
 
   //printing results
   if (bestRatioDiff < 1.0)
@@ -64,7 +110,7 @@ float bestResistance() {
 
 void readResistance() {
   int vout = analogRead(analogPin);
-  //  vin = analogRead(vinPin);
+  vin = analogRead(vinPin);
   if (vout)
   {
     ratio = ((float)vout) / vin;
