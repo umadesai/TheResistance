@@ -24,6 +24,7 @@ Servo sorter;
 
 void setup()
 {
+   Wire.begin();
   Serial.begin(9600);
   Serial.println("The Revolution");
   //stepper

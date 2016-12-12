@@ -83,7 +83,7 @@ float bestResistance() {
 
 
       //      float ratioDiff = abs(ratio - desiredRatio);
-      //DSte
+
       //      //set the next value of digiPotVal based on how far we are from the ideal
       //      if (ratioDiff > WAY_OFF_THRESHOLD) {
       //        digiPotVal += 20;
@@ -119,6 +119,8 @@ void readResistance() {
   Serial.print(r1);
   Serial.print(" ");
   Serial.print(vout);
+  Serial.print(" ");
+  Serial.print(vin);
   Serial.print(" ");
   Serial.println(unknownR);
 }
@@ -195,19 +197,6 @@ void setStartingValues() {
   bestVal = 0;
 }
 
-int addWhenInByte(int initial, int delta) {
-  if (initial <= 255 - delta)
-    return initial + delta;
-  else
-    return 255;
-}
-
-int subtractWhenInByte(int initial, int delta) {
-  if (initial >= delta)
-    return initial - delta;
-  else
-    return 0;
-}
 void writeDigiPotResistance(byte val, int whichResistor) {
   int address = 0;
   if (whichResistor == 0) {
