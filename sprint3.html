@@ -90,7 +90,11 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <p>During Sprint 2, we did a lot of work on individual subsystems, and managed to make an integrated prototype of our resistance tester. This sprint, we hope to continue to integrate, and hopefully create our minimum viable product.</p>
-                    
+
+                    <h2 class="section-heading">Integrated Sprint Deliverable</h2>
+
+                    <p><iframe width="560" height="315" src="https://www.youtube.com/watch?v=3qOApwS-JME" frameborder="0" allowfullscreen></iframe></p>
+
                     <h2 class="section-heading">Mechanical</h2>
 
                     <p>This sprint, we redesigned the ramp mechanism. Instead of a feeder with a slot to let resistors through, we started work on a sled shape with a gap large enough to fit the notched wheel. This made it so that the resistors could fall all the way to the end of the ramp and wait to roll into one of the wheel notches. </p>
@@ -129,19 +133,35 @@
 
                     <h2 class="section-heading">Electrical</h2>
 
-                    <p></p>
+                    <p>During this sprint, we worked on the digital potentiometer circuit. The circuit was more complicated than we originally expected, so it took longer than we planned to get it working. After much rewiring, tweaking, and reprogramming, we were finally able to successfully use the digital potentiometers as we planned. Using the digital potentiometers, we were able to get generally close values (±5%) for the test resistors. </p>
+
+                    <p>We used an I2C interface to control the potentiometers with an Arduino. This required that we connect the SCL (serial clock input) and SDA (Serial Data Input/Output) pins on each potentiometer to the A5 and A4 analog pins on the Arduino microcontroller respectively. Since we only had one of each of the analog pins we had to use the same ones for all the devices that need an I2C interface and assign them different addresses.</p>
+
+                    <p>While the address of each potentiometer was the same, we used the AD1 and AD0 pins to assign each individual potentiometers a unique address while using the same A5 and A4 pins in the microcontrollers. The table below explains the AD1 and AD0 connections in each potentiometer and their corresponding addresses.</p>
 
                     <a href="#">
-                        <img class="img-responsive" src="img/sprint3/finalSchematic.PNG" alt="" >
+                        <center><img class="img-responsive" src="img/sprint3/potTable.png" alt="" ></center>
+                    </a>
+                    <span class="caption text-muted">Table explaining the AD1 and AD0 connections in each potentiometer and their corresponding addresses. All the potentiometers share a slave address byte of 01011[AD1][AD0], where AD1 and AD0 can be either 1 if connected to 5V, or 0 if connected to ground.</span>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/sprint3/finalSchematic.PNG" alt="" ></center>
                     </a>
                     <span class="caption text-muted">Updated circuit schematic for measuring resistance of a large range of values.</span>
+
+                    <p>We tested and calibrated each potentiometer by measuring the resistance  across W1 (wiper) and B1 as shown in the diagrams of the potentiometers. </p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/sprint3/potResistance.png" alt="" ></center>
+                    </a>
+                    <span class="caption text-muted">Close up schematic of resistance of potentiometer. The Wiper Divides the resistors in parallel: R<sub>WA</sub> and R<sub>WB</sub>, which may change based on the position of the wiper but always add up to the total resistance between A and B: R<sub>AB</sub> </span
 
                     <h2 class="section-heading">Goals For Next Sprint</h2>
 
                     <ol>
-                        <li>Last iteration of resistor dispensing system.</li>
-                        <li>Final integration of digital potentiometer and relays into voltage divider circuit.</li>
-                        <li>Final design and implementation of resistor sorting system.</li>
+                        <li>Fully integrate the digital potentiometer with the rest of the system.</li>
+                        <li>Refine our ramp design so it is better able to get resistors to the wheel - This may involve shortening the ramp or redesigning it to better guide the resistors so they are in the right orientation to be caught by the wheel. </li>
+                        <li>Implement sorting system - This requires making a ramp that can get the resistors from the wheel to the containment vessel and programming the servo holding that vessel to turn to catch the resistor in the appropriate compartment.</li>
                         <li>Polish final product!</li>
                     </ol>
                 </div>
