@@ -157,7 +157,7 @@
 
                     <h2 class="section-heading">Electrical</h2>
 
-                    <p>Over the course of this sprint, we worked to build on a simple voltage divider circuit (from Sprint 1) that can measure voltage output, and therefore an unknown resistance, by incorporating digital potentiometers and relays. We noticed that a simple voltage divider measures less accurate values of resistance when the unknown resistance is different from the known resistor by orders of magnitude. To solve this problem, we designed a circuit as shown in the figure below, that uses digital potentiometers to vary the known resistance value until it is at the same order of magnitude with the unknown resistance. We use relays to make sure that at any given time only one of the potentiometers is connected to the voltage divider circuit. We use three digital potentiometers with maximum resistance values of 10 kOhms, 100 kOhms, and 1 MOhms and with precisions of …… Ohms, …., and …. respectively. This allows us to measure any resistances between 100 Ohms and 1 MOhms with reasonable accuracy. We use the first relay (labeled S1) to power (5V supply) or turn off (ground) the entire circuit. The other relays help channel the current to the desired digital potentiometer. </p>
+                    <p>Over the course of this sprint, we worked to build on a simple voltage divider circuit (from Sprint 1) that can measure voltage output, and therefore an unknown resistance, by incorporating digital potentiometers and relays. We noticed that a simple voltage divider measures less accurate values of resistance when the unknown resistance is different from the known resistor by orders of magnitude. To solve this problem, we designed a circuit as shown in the figure below, that uses digital potentiometers to vary the known resistance value until it is at the same order of magnitude with the unknown resistance. We used relays to make sure that at any given time only one of the potentiometers was connected to the voltage divider circuit. We used three digital potentiometers with maximum resistance values of 10 kΩ, 100 kΩ, and 1 MΩ and with precisions of 39 Ω, 390 Ω, and 3900 Ω respectively. This allowed us to measure any resistances between 100 Ω and 1 MΩ with reasonable accuracy. We used the first relay (labeled S1) to connect the entire circuit either to power (5V supply) or ground. The other relays helped channel the current to the desired digital potentiometer.</p>
 
                     <a href="#">
                         <center><img class="img-responsive" src="img/sprint2/upgradedCircuit.png" alt="" align="middle"></center>
@@ -165,7 +165,13 @@
                     <span class="caption text-muted">Circuit schematic of our upgraded circuit that incorporates digital potentiometeres and relays.</span>
 
                     <a href="#">
-                        <img class="img-responsive" src="img/sprint2/circuit.JPG" alt="">
+                        <center><img class="img-responsive" src="img/sprint2/pins.png" alt=""></center>
+                    </a>
+                    <span class="caption text-muted">Digital Potentiometer Pin Configuration.</span>
+
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/sprint2/pot.png" alt=""></center>
                     </a>
                     <span class="caption text-muted">In progress circuit implementation.</span>
 
