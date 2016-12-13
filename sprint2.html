@@ -97,6 +97,10 @@
                         <li>Exploring options for building off the current voltage-divider circuit to be able to measure a large range of resistor values.</li>
                     </ol>
 
+                    <h2 class="section-heading">Integrated Sprint Deliverable</h2>
+
+                    <p><iframe width="560" height="315" src="https://www.youtube.com/embed/8hl53q4ERxg" frameborder="0" allowfullscreen></iframe></p>
+
                     <h2 class="section-heading">Mechanical</h2>
 
                     <p>Over the course of this sprint, we dove into a design process where we ideated different designs for the mechanical system. In our first prototype, we were relying on gravity to make a secure connection in our circuit, which was not ideal. It left room for the resistors to sort of bounce around and “walk” out of place. This would have given us inconsistent results. To continue the original design, we would have had to create some kind of clamping mechanism to come down on our resistors at the right time, which would have added unnecessary motors and complexity to our system.</p>
@@ -124,8 +128,7 @@
 
                     <p>Well, it worked once every full wheel rotation if someone was pushing resistors down the ramp. This model showed us where the problems in our thinking and design were. When we first designed our resistor dispenser, we had our ramp ending in 1/4" of flat space since we laser cut our pieces and hadn't altered the straight edge. This was causing the resistors to get stuck before getting onto the wheel.</p>
 
-                    <p>To fix this, we are going to change around our dispenser design so that gravity helps rather than hinders us. We also found that the resistors were coming into contact with our servo motor after they were measured, causing them to either bend or get flung randomly about. This showed us that we needed to keep this constraint in mind and be mindful of where the resistor leads are relative to other parts as we switch over to our final stepper motor.</p>
-
+                    <p> To fix this, we are going to change around our dispenser design so that gravity helps rather than hinders us. We also found that the resistors were coming into contact with our servo motor after they were measured, causing them to either bend or get flung randomly about. This showed us that we needed to keep this constraint in mind and be mindful of where the resistor leads are relative to other parts as we switch over to our final stepper motor.</p>
                      <h2 class="section-heading">Computing</h2>
 
                     <p>Our main computing task for this sprint was to implement the LCD screen so that, when the resistance of the unknown resistor is being measured, it displays the resistance to the screen, which required integrating with the mechanical and electrical systems.
@@ -152,20 +155,25 @@
                     <p><a href="https://github.com/umadesai/TheResistance/blob/master/src/arduino/ResistanceTester/ResistanceTester.ino">Integrated Code File</a></p>
                     </p>
 
-                    <p><iframe width="560" height="315" src="https://www.youtube.com/embed/8hl53q4ERxg" frameborder="0" allowfullscreen></iframe></p>
-
-
                     <h2 class="section-heading">Electrical</h2>
 
-                    <p>Over the course of this sprint, we worked to build on a simple voltage divider circuit (from Sprint 1) that can measure voltage output, and therefore an unknown resistance, by incorporating digital potentiometers and relays. We noticed that a simple voltage divider measures less accurate values of resistance when the unknown resistance is different from the known resistor by orders of magnitude. To solve this problem, we designed a circuit as shown in the figure below, that uses digital potentiometers to vary the known resistance value until it is at the same order of magnitude with the unknown resistance. We use relays to make sure that at any given time only one of the potentiometers is connected to the voltage divider circuit. We use three digital potentiometers with maximum resistance values of 10 kOhms, 100 kOhms, and 1 MOhms and with precisions of …… Ohms, …., and …. respectively. This allows us to measure any resistances between 100 Ohms and 1 MOhms with reasonable accuracy. We use the first relay (labeled S1) to power (5V supply) or turn off (ground) the entire circuit. The other relays help channel the current to the desired digital potentiometer. </p>
+                    <p>Over the course of this sprint, we worked to build on a simple voltage divider circuit (from Sprint 1) that can measure voltage output, and therefore an unknown resistance, by incorporating digital potentiometers and relays. We noticed that a simple voltage divider measures less accurate values of resistance when the unknown resistance is different from the known resistor by orders of magnitude. To solve this problem, we designed a circuit as shown in the figure below, that uses digital potentiometers to vary the known resistance value until it is at the same order of magnitude with the unknown resistance. We used relays to make sure that at any given time only one of the potentiometers was connected to the voltage divider circuit. We used three digital potentiometers with maximum resistance values of 10 kΩ, 100 kΩ, and 1 MΩ and with precisions of 39 Ω, 390 Ω, and 3900 Ω respectively. This allowed us to measure any resistances between 100 Ω and 1 MΩ with reasonable accuracy. We used the first relay (labeled S1) to connect the entire circuit either to power (5V supply) or ground. The other relays helped channel the current to the desired digital potentiometer.</p>
 
                     <a href="#">
                         <center><img class="img-responsive" src="img/sprint2/upgradedCircuit.png" alt="" align="middle"></center>
                     </a>
                     <span class="caption text-muted">Circuit schematic of our upgraded circuit that incorporates digital potentiometeres and relays.</span>
 
+                    <p>We also tried to learn the use (or lack thereof) of each pin in the potentiometers by following the datasheet as well as prior works posted in the Arduino website and elsewhere.</p>
+
                     <a href="#">
-                        <img class="img-responsive" src="img/sprint2/circuit.JPG" alt="">
+                        <center><img class="img-responsive" src="img/sprint2/pins.png" alt=""></center>
+                    </a>
+                    <span class="caption text-muted">Digital Potentiometer Pin Configuration.</span>
+
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/sprint2/pot.png" alt=""></center>
                     </a>
                     <span class="caption text-muted">In progress circuit implementation.</span>
 
@@ -173,13 +181,9 @@
 
                     <p>
                     <ol>
-                        <li>Improving accuracy of mechanical setup for testing resistance, particularly dispensing system
-                            <ul style="list-style-type:none">
-                                <li>Now that we have a better idea of how the initial part of the system will be constructed, we need to work on our sorting mechanism. We will need a lighter, more streamlined containment unit (so a servo can spin it quickly without getting damaged) as well as a way to deliver the resistors to the unit after resistance is read.</li>
-                            </ul>
-                        </li>
-                        <li>Finish implementing upgraded circuit</li>
-                        <li>Further design of mechanical sorting system after resistance is outputted</li>
+                        <li>Improving accuracy of mechanical setup for testing resistance, particularly dispensing system: Our dispenser wasn’t reliable in getting resistors to the circuit. We need to find a better way to deliver the resistors from the user to the notched wheel. Ideally, this way will allow the user to input many resistors at once and they will be measured one by one.</li>
+                        <li>Finish implementing circuit to include potentiometers and relays.</li>
+                        <li>Further design of mechanical sorting system after resistance is outputted: Now that we have a better idea of how the initial part of the system will be constructed, we need to work on our sorting mechanism. We will need a lighter, more streamlined containment unit (so a servo can spin it quickly without getting damaged) as well as a way to deliver the resistors to the unit after resistance is read.</li>
                     </ol>
                     </p>
 

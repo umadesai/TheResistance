@@ -90,23 +90,79 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <p>During Sprint 2, we did a lot of work on individual subsystems, and managed to make an integrated prototype of our resistance tester. This sprint, we hope to continue to integrate, and hopefully create our minimum viable product.</p>
-                    
+
+                    <h2 class="section-heading">Integrated Sprint Deliverable</h2>
+
+                    <p><iframe width="560" height="315" src="https://www.youtube.com/embed/3qOApwS-JME" frameborder="0" allowfullscreen></iframe></p>
+
                     <h2 class="section-heading">Mechanical</h2>
 
-                    <p>This sprint, we redesigned the ramp mechanism. Instead of a feeder with a slot to let resistors through, we started work on a sled shape, so the resistors could fall to the end and wait at the dip to get picked up by the wheel. This increased the reliability of getting resistors onto the wheel; however, when the resistors slide down the ramp, it is very uncontrolled.</p>
+                    <p>This sprint, we redesigned the ramp mechanism. Instead of a feeder with a slot to let resistors through, we started work on a sled shape with a gap large enough to fit the notched wheel. This made it so that the resistors could fall all the way to the end of the ramp and wait to roll into one of the wheel notches. </p>
+
+                    <a href="#">
+                        <img class="img-responsive" src="img/sprint3/mechanicalChanges.png" alt="">
+                    </a>
+                    <span class="caption text-muted">Updated ramp design.</span>
+
+                    <p>This increased the reliability of getting resistors onto the wheel once they made it down to the place where the ramp and the wheel met. The wheel was even able to handle small lines of resistors if they were already in place. However, it was difficult to get the resistors to this position. Though the ramp was made to be a little larger than the wide part of the resistors to keep this portion centered, the resistors were still able to jump out of place and slide down wildly, ultimately landing in the wrong orientation. This meant that the wheel was unable to get to them, and, depending on their position, instead tried to break them or the system itself.</p>
+
+                    <p>In order to fix this, we will redesign the ramp. It may be a little shorter to give the resistors less space to fall out of orientation and may have more guides to keep the wide part of the resistor in the middle.</p>
+
+                    <p>We also redesigned our sorting system to be more streamlined and lighter. The old containment unit was blocky and made of MDF, which meant it would have been too cumbersome to be effective. Our new design should be easier for the servo to handle and contains more compartments to fit resistors.</p>
+
+                    <a href="#">
+                        <img class="img-responsive" src="img/sprint3/mech.png" alt="">
+                    </a>
+                    <span class="caption text-muted">Updated sorting design.</span>
+
+                    <p>Now that we have a sorting containment unit, we need a way to get the resistors into it. We are hopeful that we will be able to integrate the sorter into the system with a ramp that orients the resistors correctly before they fall into the sorter unit.</p>
+
+                    <p>During this sprint, we learned the importance of communication. Early on, when we determined that we should use a stepper motor,  the programming and mechanical subteams were thrilled to find that it would only work in one direction, since that was all that was needed. However, upon getting the stepper, the subteams didn’t think to reconvene to discuss which way was the right way to spin. Long story short, this resulted in the sprint 3 model being built with the stepper motor facing the wrong direction. This caused extra work on both the mechanical and programmatic ends; for sprint 3, the programming team needed to figure out how to get the stepper to run backwards, and for sprint 4, mechanical will need to shift around the design such that the stepper is spinning in the right direction.</p>
 
                     <h2 class="section-heading">Computing</h2>
-                    <p>We learned from last sprint that a continuous servo did not work the way we expected--because of how the servo is made continuous, the servo is no longer able to take a desired position as the input. We learned of stepper motors--motors that could rotate infinitely, but with precise control over it's position.</p>
 
-                    <p>We used the BYJ48 stepper motor, and using <a href="http://www.instructables.com/id/BYJ48-Stepper-Motor/">this Instructable</a>, we were able to get the stepper to turn. We adapted the code that allowed the stepper to turn backwards (this particular stepper could not turn backwards using the library’s methods), due to a moment of weakness and lack of communication between the computing and electrical teams that caused the stepper to be mounted such that its forward turning motion turns backwards. </p>
+                    <p>We learned from last sprint that a continuous servo did not work the way we expected--because of how the servo is made continuous, the servo is no longer able to take a desired position as the input. We learned of stepper motors--motors that could rotate infinitely, but with precise control over its position.</p>
 
-                    <h2 class="section-heading">Mechanical</h2>
+                    <a href="#">
+                        <img class="img-responsive" src="img/sprint3/stepper.jpg" alt="">
+                    </a>
+                    <span class="caption text-muted">Testing the motion of the wheel with the new stepper motor.</span>
 
-                    <p></p>
+                    <p>We used the BYJ48 stepper motor, and using <a href="http://www.instructables.com/id/BYJ48-Stepper-Motor/">this Instructable</a> we were able to get the stepper to turn. We adapted the code that allowed the stepper to turn backwards (this particular stepper could not turn backwards using the library’s methods), due to a moment of weakness and lack of communication between the computing and electrical teams that caused the stepper to be mounted such that its forward turning motion turns backwards.</p>
+
+                    <h2 class="section-heading">Electrical</h2>
+
+                    <p>During this sprint, we worked on the digital potentiometer circuit. The circuit was more complicated than we originally expected, so it took longer than we planned to get it working. After much rewiring, tweaking, and reprogramming, we were finally able to successfully use the digital potentiometers as we planned. Using the digital potentiometers, we were able to get generally close values (±5%) for the test resistors. </p>
+
+                    <p>We used an I2C interface to control the potentiometers with an Arduino. This required that we connect the SCL (serial clock input) and SDA (Serial Data Input/Output) pins on each potentiometer to the A5 and A4 analog pins on the Arduino microcontroller respectively. Since we only had one of each of the analog pins we had to use the same ones for all the devices that need an I2C interface and assign them different addresses.</p>
+
+                    <p>While the address of each potentiometer was the same, we used the AD1 and AD0 pins to assign each individual potentiometers a unique address while using the same A5 and A4 pins in the microcontrollers. The table below explains the AD1 and AD0 connections in each potentiometer and their corresponding addresses.</p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/sprint3/potTable.png" alt="" ></center>
+                    </a>
+                    <span class="caption text-muted">Table explaining the AD1 and AD0 connections in each potentiometer and their corresponding addresses. All the potentiometers share a slave address byte of 01011[AD1][AD0], where AD1 and AD0 can be either 1 if connected to 5V, or 0 if connected to ground.</span>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/sprint3/finalSchematic.PNG" alt="" ></center>
+                    </a>
+                    <span class="caption text-muted">Updated circuit schematic for measuring resistance of a large range of values.</span>
+
+                    <p>We tested and calibrated each potentiometer by measuring the resistance  across W1 (wiper) and B1 as shown in the diagrams of the potentiometers. </p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/sprint3/potResistance.png" alt="" ></center>
+                    </a>
+                    <span class="caption text-muted">Close up schematic of resistance of potentiometer. The Wiper Divides the resistors in parallel: R<sub>WA</sub> and R<sub>WB</sub>, which may change based on the position of the wiper but always add up to the total resistance between A and B: R<sub>AB</sub> </span
 
                     <h2 class="section-heading">Goals For Next Sprint</h2>
 
-                    <p>For next sprint, we hope to prototype our mechanical system more as well as coming up with other possible mechanical designs. We also want to include the digital potentiometer into out electrical design, and output the measured resistance using the Arduino and an LCD screen.
+                    <ol>
+                        <li>Fully integrate the digital potentiometer with the rest of the system.</li>
+                        <li>Refine our ramp design so it is better able to get resistors to the wheel - This may involve shortening the ramp or redesigning it to better guide the resistors so they are in the right orientation to be caught by the wheel. </li>
+                        <li>Implement sorting system - This requires making a ramp that can get the resistors from the wheel to the containment vessel and programming the servo holding that vessel to turn to catch the resistor in the appropriate compartment.</li>
+                        <li>Polish final product!</li>
+                    </ol>
                 </div>
             </div>
             <!-- Pager -->
