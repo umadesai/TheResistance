@@ -70,7 +70,7 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/sprint1/bg.jpg')">
+    <header class="intro-header" style="background-image: url('img/About/arduinoBG.jpeg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -94,11 +94,11 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-                    <p>Final Description</p>
-
-                    <p>A system diagram depicting the schematic relationships between all of the different subsystems comprising your final system.</p> 
+                    <p><b>We created a resistor sorting machine that introduces resistors one at a time into a resistor measuring circuit, outputs the measured resistance to an lcd screen, and sorts the resistor into an appropriate slot. </b></p>
 
                     <p>Photos or videos of your final system in action.</p>
+
+                    <p>A system diagram depicting the schematic relationships between all of the different subsystems comprising your final system.</p> 
                     
                     <h2 class="section-heading">Electrical Component</h2>
 
@@ -108,7 +108,11 @@
 
                     <p>A detailed description of your mechanical design (CAD images/renderings are appropriate) and any necessary analysis.</p>
 
-                    <h2 class="section-heading">Software/Firmware Component</h2>
+                    <p><h2 class="section-heading">Software/Firmware Component</h2> <a href="https://github.com/umadesai/TheResistance"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></p>
+
+                    <p>The software components of the product are all compiled into <a href="https://github.com/umadesai/TheResistance/blob/master/src/arduino/ResistanceTester/ResistanceTester.ino">one program</a>  in Arduino C that coordinates the LCD screen, stepper motor for the wheel, servo motor for the sorter, and reading the resistances using the relays and digital potentiometers. Luckily, all of these processes run on one schedule. The main loop tests the resistance (using the digital potentiometers), prints it to the lcd, moves the sorter wheel, then moves the main wheel so that the next notch is against the wires up top.</p>
+
+                    <p>This program is in src/arduino/ResistanceTester and is the only program being run when the machine is on. The other programs in the Github repository were for testing and building the different subsystems.</p>
 
                     <p>A detailed description of the firmware design with links to complete source code (github or other repository is helpful).</p>
 
