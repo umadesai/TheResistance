@@ -70,7 +70,7 @@ float bestResistance() {
 
       else if (state == 2) {
         digiPotVal++;         // increment value by 1
-        if (digiPotVal >= (bestVal + 10)) { // if it passes 256th position (max), reset to zero
+        if (digiPotVal >= (bestVal + 10) || digiPotVal > 255) { // if it passes 256th position (max), reset to zero
           state = 3;
         }                 // start over from lowest value
       }

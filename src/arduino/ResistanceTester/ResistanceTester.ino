@@ -24,7 +24,7 @@ Servo sorter;
 
 void setup()
 {
-   Wire.begin();
+  Wire.begin();
   Serial.begin(9600);
   Serial.println("The Revolution");
   //stepper
@@ -58,44 +58,44 @@ void setup()
   }
 
   //calibration
-//  pinMode(BUTTON, INPUT);
-//
-//
-//  if (USE_LCD) {
-//    lcd.clear();
-//    lcd.setCursor(0, 0);
-//    lcd.print("Press the button");
-//    lcd.setCursor(0, 1);
-//    lcd.print("");
-//    lcd.print("when a notch on the");
-//    lcd.setCursor(0, 2);
-//    lcd.print("wheel is aligned");
-//    lcd.setCursor(0, 3);
-//    lcd.print("with the ramp");
-//  }
-//
-//  boolean initButton = digitalRead(BUTTON);
-//  while (digitalRead(BUTTON) == initButton) {
-//    singleStep();
-//    delay(20);
-//  }
-//
-//  delay(250);
-//  for (int i = 0; i < 341; i++) {
-//    singleStep();
-//    delay(5);
-//  }
-//
-//   if (USE_LCD) {
-//    lcd.clear();
-//    lcd.setCursor(1, 0);
-//    lcd.print("When you are ready,");
-//    lcd.setCursor(0, 1);
-//    lcd.print("drop a resistor onto");
-//    lcd.setCursor(6, 2);
-//    lcd.print("the ramp");
-//    delay(3500);
-//  }
+  pinMode(BUTTON, INPUT);
+
+
+  if (USE_LCD) {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Press the button");
+    lcd.setCursor(0, 1);
+    lcd.print("");
+    lcd.print("when a notch on the");
+    lcd.setCursor(0, 2);
+    lcd.print("wheel is aligned");
+    lcd.setCursor(0, 3);
+    lcd.print("with the ramp");
+  }
+
+  boolean initButton = digitalRead(BUTTON);
+  while (digitalRead(BUTTON) == initButton) {
+    singleStep();
+    delay(20);
+  }
+
+  delay(250);
+  for (int i = 0; i < 341; i++) {
+    singleStep();
+    delay(5);
+  }
+
+  if (USE_LCD) {
+    lcd.clear();
+    lcd.setCursor(1, 0);
+    lcd.print("When you are ready,");
+    lcd.setCursor(0, 1);
+    lcd.print("drop a resistor onto");
+    lcd.setCursor(6, 2);
+    lcd.print("the ramp");
+    delay(3500);
+  }
 }
 
 void loop()
@@ -106,28 +106,28 @@ void loop()
     singleStep();
     delay(10);
   }
-  
+
 }
 
-void setSorterWheelPos(float resistance){
-   if(resistance < 1000){
-      sorter.write(0);
-   }
-   if(resistance < 5000){
-      sorter.write(60);
-   }
-   if(resistance < 10000){
-      sorter.write(120);
-   }
-   if(resistance < 50000){
-      sorter.write(180);
-   }
-   if(resistance < 100000){
-      sorter.write(240);
-   }
-   if(resistance < 1000000){
-      sorter.write(300);
-   }
+void setSorterWheelPos(float resistance) {
+  if (resistance < 1000) {
+    sorter.write(0);
+  }
+  if (resistance < 5000) {
+    sorter.write(60);
+  }
+  if (resistance < 10000) {
+    sorter.write(120);
+  }
+  if (resistance < 50000) {
+    sorter.write(180);
+  }
+  if (resistance < 100000) {
+    sorter.write(240);
+  }
+  if (resistance < 1000000) {
+    sorter.write(300);
+  }
 }
 
 void singleStep() {
