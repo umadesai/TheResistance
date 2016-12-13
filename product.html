@@ -115,7 +115,7 @@
                         <img class="img-responsive" src="img/product/eq1.png" alt="">
                     </a>
 
-                    <p> Thus, we can calculate the resistance of the unknown resistor using the following equation:</p>
+                    <p> Thus, we can calculate the resistance of the unknown resistor using the equation:</p>
 
                     <a href="#">
                         <img class="img-responsive" src="img/product/eq2.png" alt="">
@@ -132,16 +132,20 @@
 
                     <p>We used potentiometers with maximum resistance values of 10 kΩ, 100 kΩ, and 1 MΩ and precisions of 39 Ω, 390 Ω, and 3900 Ω respectively. This allowed us to measure any resistances between 100 Ω and 1 MΩ with reasonable accuracy. </p>
 
-                    <p> Our first step in learning to use the potentiometers was understanding the purpose of each of the 14 pins on each. We used the AD5241 datasheet and online records of projects that used digital potentiometers to annotate and use the pins as shown in the diagram below. </p>
+                    <p>Our first step in learning to use the potentiometers was understanding the purpose of each of the 14 pins on each potentiometer. We used the AD5241 datasheet and online records of projects that used digital potentiometers to annotate and use the pins as shown in the diagram below. </p>
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/sprint2/pins.png" alt=""></center>
+                    </a>
+                    <span class="caption text-muted">Potentiometer top view</span>
 
                     <a href="#">
-                        <center><img class="img-responsive" src="img/product/fig3.png" alt=""></center>
+                        <center><img class="img-responsive" src="img/product/newSchem.png" alt=""></center>
                     </a>
-                    <span class="caption text-muted">Potentiometer top view (left) and annotated schematic showing appropriate connections for a generic AD5241 potentiometer</span>
+                    <span class="caption text-muted">Annotated schematic showing appropriate connections for a generic AD5241 potentiometer</span>
 
-                    <p>We used an I2C interface to control the potentiometers with an Arduino. This required that we connect the SCL (serial clock input) and SDA (Serial Data Input/Output) pins on each potentiometer to the A5 and A4 analog pins on the Arduino microcontroller respectively. Since we only had one of each of the analog pins we created different addresses for the potentiometers while they share the same pins on the microcontroller. </p>
+                    <p>We used an I2C interface to control the potentiometers with an Arduino. This required that we connect the SCL (serial clock input) and SDA (Serial Data Input/Output) pins on each potentiometer to the A5 and A4 analog pins on the Arduino microcontroller respectively. Since we only had one of each of these pins we created different addresses for the potentiometers while they shared the same pins on the microcontroller.</p>
 
-                    <p> All the potentiometers share a slave address byte of 01011[AD1][AD0], where AD1 and AD0 can be either 1 if connected to 5V, or 0 if connected to ground. The table below explains the AD1 and AD0 connections in each potentiometer and their corresponding addresses.</p>
+                    <p>All the potentiometers share a slave address byte of 01011[AD1][AD0], where AD1 and AD0 can be either 1 if connected to 5V, or 0 if connected to ground. The table below explains the AD1 and AD0 connections in each potentiometer and their corresponding addresses.</p>
 
                     <a href="#">
                         <center><img class="img-responsive" src="img/sprint3/potTable.png" alt=""></center>
@@ -155,28 +159,117 @@
                     </a>
                     <span class="caption text-muted">Close up schematic of resistance of potentiometer. The Wiper Divides the resistors in parallel: R<sub>WA</sub> and R<sub>WB</sub>, which may change based on the position of the wiper but always add up to the total resistance between A and B: R<sub>AB</sub> </span>
 
-                    Using this process, we were able to get generally close values (±5%) for the test resistors. 
+                    <p>Using this process, we were able to get generally close values (±5%) for the test resistors.</p>
 
                     <p><b>Relays</b></p>
 
-                    <p> We used relays to make sure that at any given time only one of the potentiometers (with resistance of the desired order of magnitude) was connected to the voltage divider circuit. We used the first relay (labeled S1 in the final circuit schematic) to connect the entire circuit either to power (5V supply) or ground. The other relays help channel the current to the desired digital potentiometer.</p>
+                    <p>We used relays to make sure that at any given time only one of the potentiometers (with resistance of the desired order of magnitude) was connected to the voltage divider circuit. We used the first relay (labeled S1 in the final circuit schematic) to connect the entire circuit either to power (5V supply) or ground. The other relays help channel the current to the desired digital potentiometer.</p>
 
                     <p><b>Final Circuit Schematic: Integrating Digital Potentiometers and Relays</b></p>
 
                     <a href="#">
+                        <center><img class="img-responsive" src="img/product/elecCircuit.png" alt="" ></center>
+                    </a>
+                    <span class="caption text-muted">Relay circuit.</span>
+
+                    <a href="#">
                         <center><img class="img-responsive" src="img/sprint3/finalSchematic.PNG" alt="" ></center>
                     </a>
-                    <span class="caption text-muted">Updated circuit schematic for measuring resistance of a large range of values.</span>
+                    <span class="caption text-muted">Digital Potentiometer Circuit.</span>
 
-                    We switch the states of the relays (on or off) to control which potentiometer is R<sub>known</sub> at a given time. For example, in the setup depicted in the schematic, when all the relays are turned off, they make connections such that R<sub>known</sub> is the 100k potentiometer.
+                    <p>We switch the states of the relays (on or off) to control which potentiometer is R<sub>known</sub> at a given time. For example, in the setup depicted in the schematic, when relays 1 and 2 are off, they make connections such that R<sub>known</sub> is the 100k potentiometer.</p>
+
+                    <p>We calibrated our digital potentiometers and created equations to calculate their resistances as accurately as possible. We did this by setting the digital potentiometer to a number of values, and recording the actual resistance of the digital potentiometer at that value with a Ohmmeter, and then creating a “best fit” calibration curve from those points. This was because we noticed that the equations provided in the data sheet were giving us somewhat inaccurate results.</p>
+
+                    <p>This allows us to dynamically alter the resistance we are testing against in order to get the most accurate results. By using our relay system with the three digital potentiometers, we are able to accurately find the resistance of a very wide range of resistors (100Ω to 1MΩ). We tested our system with a wide range of resistors and found that we could accurately find the resistance of all of them, with a maximum error of 5%* of the resistance value. </p>
+                    <p>*made up number, but likely accurate</p>
 
                     <h2 class="section-heading">Mechanical Component</h2>
 
-                    <p>A detailed description of your mechanical design (CAD images/renderings are appropriate) and any necessary analysis.</p>
+                    <p>A Full CAD of the project along with its assemblies may be found <a href="https://drive.google.com/drive/folders/0B_zJKXAeM-rEeTQwb2hHbk5yQjg?usp=sharing">here.</a></p>
+
+                    <p><b>Feeder Ramp</b></p>
+                    <p>We decided that the best way to get the resistors from the user to the circuit that measures them was to create some sort of feeder that the user could drop as many resistors on it as they wanted and just let the machine work through the que. To achieve this, we tested 4 different ramp designs before settling on the one we have now. The way this ramp was intended to work is as follows:</p>
+
+                    <p>The user inserts the wide plastic portion of the resistor into the middle of the ramp with the leads of the resistors straightened and coming out of the slits on the sides of the ramp.</p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/product/fig1.png" alt="" ></center>
+                    </a>
+                 
+
+                    <p> The ramp then controls the sliding of the resistor by keeping it centered until it is about to enter the notched wheel. At this point, the top guiding portion falls away and allows the resistor to free slide for the last half inch or so. At the end of the slide, the bottom widens and hugs the notched wheel and gravity pulls the resistor down to where the wheel and the ramp meet.</p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/product/fig2.png" alt="" ></center>
+                    </a>
+               
+
+                    <p>This was by far the most difficult mechanical aspect of this project. While the feeder ramp generally works up until the point where the top guide goes away, the resistors do not reliably fall into the crevice between the notched wheel and the ramp. This is likely a combination of physical fabrication (e.g. extra hot glue may be guiding the resistors out of the correct orientation) as well as potentially overcomplicated design. There is likely a much simpler way of doing this particular aspect of our project that would be more effective.</p>
+
+                    <p><b>Notched Wheel</b></p>
+
+                    <p> After the resistor falls to the bottom of the feeder ramp, it is picked up by a wheel with three notches. These notches are spaced such that as the wheel continuously turns clockwise, a resistor is either being picked up, tested against the circuit, or dropped onto the sorting ramp. When the notched wheel picks up the resistor, it is in the position below. This position allows a single resistor to roll into the precisely sized notch and be picked up. </p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/product/fig3.JPG" alt="" ></center>
+                    </a>
+                   
+
+                    <p>In the testing phase of the feeder wheel, the wide part of the resistor is seated solidly in the notch with the leads sticking out over the sides. These leads are pushed up and into exposed wires, causing the resistor to complete the circuit and allowing the circuit to test the resistor. This position is shown below with the positioning of the wires shown in blue. Note that the notch is approximately a tenth of an inch above the wires. This ensures that even if the resistor went into the feeder wheel slightly bent, its leads will make a secure connection with the circuit.</p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/product/fig4.png" alt="" ></center>
+                    </a>
+                 
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/product/fig5.JPG" alt="" ></center>
+                    </a>
+               
+
+                    <p>Finally, the notched wheel continues to turn after the resistance has been determined until the resistor slips out of the notch and falls onto the sorting ramp. The position of the wheel at this point is shown below:</p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/product/fig6.JPG" alt="" ></center>
+                    </a>
+            
+
+                    <p>Of all of the pieces of our mechanical system, the wheel worked most effectively. Its design was based on the conceptual design of a toothpick dispenser; it could have many resistors pressing against it at once, but will only take one with every notch.</p>
+
+                    <p><b> Sorting System</b></p>
+
+                    <p> The final mechanical portion of our project is the sorting system. After the notched wheel drops the resistor, it falls onto a ramp. </p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/product/fig7.JPG" alt="" ></center>
+                    </a>
+                    
+
+                    <p>This ramp is wide enough that it is able to catch the resistor reliably when it falls from the notched wheel and serves the purpose of reorienting the resistor so it can fall more or less vertically into the actual sorting vessel.</p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/product/fig8.JPG" alt="" ></center>
+                    </a>
+
+                    <p>The vessel itself has 6 compartments, which split sorted resistors up into 6 groups:
+
+                    <ol>
+                        <li>Segment 1: <1K </li>
+                        <li>Segment 2: 1K-5K</li>
+                        <li>Segment 2: 1K-5K</li>
+                        <li>Segment 2: 1K-5K</li>
+                        <li>Segment 3: 5K-10K</li>
+                        <li>Segment 4: 10K-50K</li>
+                        <li>Segment 5: 50K-100K</li>
+                        <li>Segment 6: 100K-1M</li>
+                    </ol>
+
+                    When the resistor goes through the circuit, the program determines what segment is appropriate for the resistor and the vessel is turned such that the appropriate segment waits for the resistor at the bottom of the ramp when it drops.</p>
 
                     <p><h2 class="section-heading">Software/Firmware Component</h2> <a href="https://github.com/umadesai/TheResistance"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></p>
 
-                    <p>The software components of the product are all compiled into <a href="https://github.com/umadesai/TheResistance/blob/master/src/arduino/ResistanceTester">one program</a>  in Arduino C that coordinates the LCD screen, stepper motor for the wheel, servo motor for the sorter, and reading the resistances using the relays and digital potentiometers. Luckily, all of these processes run on one schedule. The main loop tests the resistance (using the digital potentiometers), prints it to the lcd, moves the sorter wheel, then moves the main wheel so that the next notch is against the wires up top.</p>
+                    <p>The software components of the product are all compiled into <a href="https://github.com/umadesai/TheResistance/blob/master/src/arduino/ResistanceTester">one program</a>  in Arduino C that coordinates the LCD screen, stepper motor for the wheel, servo motor for the sorter, and reading the resistances using the relays and digital potentiometers. Luckily, all of these processes run on one schedule. The main loop tests the resistance (using the digital potentiometers), prints it to the LCD, moves the sorter wheel, then moves the main wheel so that the next notch is against the wires up top.</p>
 
                     <p>We separated as much as we could into different methods. We have methods to step the stepper motor, to calibrate the wheel using user input, and a method to find the most accurate resistance prediction, as well as the corresponding helper methods to set the relay configuration, write commands to the digital potentiometers, and read the current resistance guess. Because of our generous use of methods, it's easy to swap out different functions--for example, it would be easy to replace the digital potentiometers with resistors, and it would be easy to come up with a new calibration method and replace the old one.</p>
 
