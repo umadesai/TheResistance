@@ -10,7 +10,7 @@ const int analogPin = A0, vinPin = A1;
 const int RELAY1 = 11, RELAY2 = 12, RELAY3 = 13;
 
 LiquidCrystal_I2C lcd(0x3F, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);  // Set the LCD I2C address
-const boolean USE_LCD = false;
+const boolean USE_LCD = true;
 
 //stepper in
 int IN1 = 3, IN2 = 4, IN3 = 5, IN4 = 6;
@@ -24,7 +24,7 @@ Servo sorter;
 
 void setup()
 {
-  Wire.begin();
+//  Wire.begin();
   Serial.begin(9600);
   Serial.println("The Revolution");
   //stepper
@@ -59,9 +59,22 @@ void setup()
 
   //calibration
   pinMode(BUTTON, INPUT);
+  calibrate();
+}
 
+void loop()
+{
+  float resistance = bestResistance();
+  setSorterWheelPos(resistance);
+  for (int i = 0; i < 682; i++) {
+    singleStep();
+    delay(10);
+  }
 
-  if (USE_LCD) {
+}
+
+void calibrate(){
+   if (USE_LCD) {
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Press the button");
@@ -96,17 +109,6 @@ void setup()
     lcd.print("the ramp");
     delay(3500);
   }
-}
-
-void loop()
-{
-  float resistance = bestResistance();
-  setSorterWheelPos(resistance);
-  for (int i = 0; i < 682; i++) {
-    singleStep();
-    delay(10);
-  }
-
 }
 
 void setSorterWheelPos(float resistance) {
@@ -160,9 +162,9 @@ void singleStep() {
       writeStepperPins(LOW, LOW, LOW, LOW);
       break;
   }
-  currentStep -= 2;
-  if (currentStep < 0)
-    currentStep = 7;
+  currentStep += 2;
+  if (currentStep >= 7)
+    currentStep = 0;
 }
 
 void writeStepperPins(int in1Val, int in2Val, int in3Val, int in4Val) {
