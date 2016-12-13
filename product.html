@@ -150,6 +150,26 @@
 
                     <p>Once the circuitry was complete, we tested and calibrated each potentiometer by measuring the resistance across W1 (wiper) and B1. This is the resistance of what we refer to as the known resistor in the voltage divider circuit. </p>
 
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/sprint3/potResistance.png" alt="" ></center>
+                    </a>
+                    <span class="caption text-muted">Close up schematic of resistance of potentiometer. The Wiper Divides the resistors in parallel: R<sub>WA</sub> and R<sub>WB</sub>, which may change based on the position of the wiper but always add up to the total resistance between A and B: R<sub>AB</sub> </span>
+
+                    Using this process, we were able to get generally close values (±5%) for the test resistors. 
+
+                    <p><b>Relays</b></p>
+
+                    <p> We used relays to make sure that at any given time only one of the potentiometers (with resistance of the desired order of magnitude) was connected to the voltage divider circuit. We used the first relay (labeled S1 in the final circuit schematic) to connect the entire circuit either to power (5V supply) or ground. The other relays help channel the current to the desired digital potentiometer.</p>
+
+                    <p><b>Final Circuit Schematic: Integrating Digital Potentiometers and Relays</b></p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/sprint3/finalSchematic.PNG" alt="" ></center>
+                    </a>
+                    <span class="caption text-muted">Updated circuit schematic for measuring resistance of a large range of values.</span>
+
+                    We switch the states of the relays (on or off) to control which potentiometer is R<sub>known</sub> at a given time. For example, in the setup depicted in the schematic, when all the relays are turned off, they make connections such that R<sub>known</sub> is the 100k potentiometer.
+
                     <h2 class="section-heading">Mechanical Component</h2>
 
                     <p>A detailed description of your mechanical design (CAD images/renderings are appropriate) and any necessary analysis.</p>
