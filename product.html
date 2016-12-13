@@ -94,16 +94,26 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-                    <p><b>We created a resistor sorting machine that introduces resistors one at a time into a resistor measuring circuit, outputs the measured resistance to an lcd screen, and sorts the resistor into an appropriate slot. </b></p>
+                    <p><b>We created <i>the Revolution,</i> a resistor sorting machine that introduces resistors one at a time into a resistor measuring circuit, outputs the measured resistance to an LCD screen, and sorts the resistor into an appropriate slot. </b></p>
 
-                    <p>Photos or videos of your final system in action.</p>
+                    <a href="#">
+                        <img class="img-responsive" src="img/product/final.jpg" alt="">
+                    </a>
+                    <span class="caption text-muted"><i>The Revolution</i></span>
 
-                    <p><b>Overall System Diagram</b></p>
+                    <h2 class="section-heading"><i>The Revolution</i> in Action</h2>
+
+                    <p><iframe width="560" height="315" src="https://www.youtube.com/embed/GZlOlEwKNUs" frameborder="0" allowfullscreen></iframe></p>
 
                     <a href="#">
                         <img class="img-responsive" src="img/About/SystemsDiagram.png" alt="">
                     </a>
-                    <span class="caption text-muted">Full System Diagram</span>
+
+                    <p><b>Overall System Diagram</b></p>
+
+                    <a href="#">
+                        <img class="img-responsive" src="img/product/diag.png" alt="">
+                    </a>
                     
                     <h2 class="section-heading">Electrical Component</h2>
 
@@ -269,7 +279,7 @@
 
                     <p><h2 class="section-heading">Software/Firmware Component</h2> <a href="https://github.com/umadesai/TheResistance"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></p>
 
-                    <p>The software components of the product are all compiled into <a href="https://github.com/umadesai/TheResistance/blob/master/src/arduino/ResistanceTester">one program</a>  in Arduino C that coordinates the LCD screen, stepper motor for the wheel, servo motor for the sorter, and reading the resistances using the relays and digital potentiometers. Luckily, all of these processes run on one schedule. The main loop tests the resistance (using the digital potentiometers), prints it to the LCD, moves the sorter wheel, then moves the main wheel so that the next notch is against the wires up top.</p>
+                    <p>The software components of the product are all compiled into <a href="https://github.com/umadesai/TheResistance/blob/master/src/arduino/ResistanceTester">a main program</a>  in Arduino C that coordinates the LCD screen, stepper motor for the wheel, servo motor for the sorter, and reading the resistances using the relays and digital potentiometers. Luckily, all of these processes run on one schedule. The main loop tests the resistance (using the digital potentiometers), prints it to the LCD, moves the sorter wheel, then moves the main wheel so that the next notch is against the wires up top.</p>
 
                     <p>We separated as much as we could into different methods. We have methods to step the stepper motor, to calibrate the wheel using user input, and a method to find the most accurate resistance prediction, as well as the corresponding helper methods to set the relay configuration, write commands to the digital potentiometers, and read the current resistance guess. Because of our generous use of methods, it's easy to swap out different functions--for example, it would be easy to replace the digital potentiometers with resistors, and it would be easy to come up with a new calibration method and replace the old one.</p>
 
@@ -283,7 +293,14 @@
 
                     <p>For sorting, we use the Servo library, and came up with 6 different categories to sort the resistors. We then wrote the servo to go to the angle that corresponds witht that section of the vessel. This is contained in the setSorterWHeelPos() method.</p>
 
+                    <p><b>Organization of Method Calls in ResistanceTester</b></p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/product/uml.png" alt=""></center>
+                    </a>
+
                     <p>The other programs in the Github repository were for testing and building the different subsystems.</p>
+
 
                 </div>
             </div>
