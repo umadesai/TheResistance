@@ -107,7 +107,48 @@
                     
                     <h2 class="section-heading">Electrical Component</h2>
 
-                    <p>A detailed description of electrical design (circuit diagrams are appropriate) and any necessary analysis. </p>
+                    <p><b>Basic Voltage Divider Circuit to Measure Resistance</b></p>
+
+                    <p>To measure the resistance, we created a voltage divider, with one known resistor value and one unknown. Using an Arduino, we can analyze the voltage reading in between the two resistors and calculate the ratio of resistance between the two resistors. The current passing through the resistors in series, as shown in the diagram below, is the same. That means:</p>
+
+                    <a href="#">
+                        <img class="img-responsive" src="img/product/eq1.png" alt="">
+                    </a>
+
+                    <p> Thus, we can calculate the resistance of the unknown resistor using the following equation:</p>
+
+                    <a href="#">
+                        <img class="img-responsive" src="img/product/eq2.png" alt="">
+                    </a>
+
+                    <a href="#">
+                        <img class="img-responsive" src="img/sprint1/circuitdiagram.png" alt="">
+                    </a>
+                    <span class="caption text-muted">Voltage divider circuit</span>
+
+                    <p>The problem with this design is that the voltage we read is based on the ratio between the two resistor values. The arduino can only accurately read voltage up to a certain point, so the further apart the resistor values get the less accurate our reading will be. We resolved this problem using digital potentiometers to adjust the resistance of the known resistor until it is at the same order of magnitude with the unknown resistance. </p>
+
+                    <p><b>Potentiometers as Adjustable Known Resistors for Voltage Divider Circuit</b></p>
+
+                    <p>We used potentiometers with maximum resistance values of 10 kΩ, 100 kΩ, and 1 MΩ and precisions of 39 Ω, 390 Ω, and 3900 Ω respectively. This allowed us to measure any resistances between 100 Ω and 1 MΩ with reasonable accuracy. </p>
+
+                    <p> Our first step in learning to use the potentiometers was understanding the purpose of each of the 14 pins on each. We used the AD5241 datasheet and online records of projects that used digital potentiometers to annotate and use the pins as shown in the diagram below. </p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/product/fig3.png" alt=""></center>
+                    </a>
+                    <span class="caption text-muted">Potentiometer top view (left) and annotated schematic showing appropriate connections for a generic AD5241 potentiometer</span>
+
+                    <p>We used an I2C interface to control the potentiometers with an Arduino. This required that we connect the SCL (serial clock input) and SDA (Serial Data Input/Output) pins on each potentiometer to the A5 and A4 analog pins on the Arduino microcontroller respectively. Since we only had one of each of the analog pins we created different addresses for the potentiometers while they share the same pins on the microcontroller. </p>
+
+                    <p> All the potentiometers share a slave address byte of 01011[AD1][AD0], where AD1 and AD0 can be either 1 if connected to 5V, or 0 if connected to ground. The table below explains the AD1 and AD0 connections in each potentiometer and their corresponding addresses.</p>
+
+                    <a href="#">
+                        <center><img class="img-responsive" src="img/sprint3/potTable.png" alt=""></center>
+                    </a>
+                    <span class="caption text-muted">Table explaining the AD1 and AD0 connections in each potentiometer and their corresponding addresses. All the potentiometers share a slave address byte of 01011[AD1][AD0], where AD1 and AD0 can be either 1 if connected to 5V, or 0 if connected to ground.</span>
+
+                    <p>Once the circuitry was complete, we tested and calibrated each potentiometer by measuring the resistance across W1 (wiper) and B1. This is the resistance of what we refer to as the known resistor in the voltage divider circuit. </p>
 
                     <h2 class="section-heading">Mechanical Component</h2>
 
