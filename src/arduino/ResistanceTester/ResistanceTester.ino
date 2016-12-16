@@ -115,19 +115,19 @@ void setSorterWheelPos(float resistance) {
   if (resistance < 1000) {
     sorter.write(0);
   }
-  if (resistance < 5000) {
+  else if (resistance < 5000) {
     sorter.write(60);
   }
-  if (resistance < 10000) {
+  else if (resistance < 10000) {
     sorter.write(120);
   }
-  if (resistance < 50000) {
+  else if (resistance < 50000) {
     sorter.write(180);
   }
-  if (resistance < 100000) {
+  else if (resistance < 100000) {
     sorter.write(240);
   }
-  if (resistance < 1000000) {
+  else {
     sorter.write(300);
   }
 }
